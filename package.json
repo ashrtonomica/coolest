@@ -6,7 +6,8 @@
     "dev": "vite dev --port 8080",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@tanstack/react-router": "1.170.18",
@@ -21,6 +22,7 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "5.2.0",
+    "nitro": "^3.0.260603-beta",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
     "vite": "8.2.0",
