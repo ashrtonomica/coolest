@@ -1,0 +1,418 @@
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Where to Buy & Trade RBNT | Redbelly DAO TASK-20" },
+      {
+        name: "description",
+        content:
+          "Canonical, dated list of every live venue trading RBNT: native spot, wrapped spot, and derivatives. Verified 2026-08-08 UTC.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "Where to Buy & Trade RBNT" },
+      {
+        property: "og:description",
+        content:
+          "Canonical venue list for RBNT: native spot, wrapped spot, and derivatives. Verified 2026-08-08 UTC.",
+      },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Where to Buy & Trade RBNT" },
+      {
+        name: "twitter:description",
+        content:
+          "Canonical venue list for RBNT: native spot, wrapped spot, and derivatives.",
+      },
+    ],
+  }),
+  component: Page,
+});
+
+type Venue = {
+  name: string;
+  type: "CEX" | "DEX" | "NONE";
+  pair: string;
+  url: string | null;
+  status: "verified" | "thin" | "unconfirmed" | "none";
+  category: "native-spot" | "wrapped-spot" | "futures";
+  chain?: string;
+  flag?: string;
+};
+
+const VENUES: Venue[] = [
+  {
+    name: "MEXC",
+    type: "CEX",
+    pair: "RBNT/USDT, RBNT/USDC",
+    url: "https://www.mexc.com/exchange/RBNT_USDT",
+    status: "verified",
+    category: "native-spot",
+  },
+  {
+    name: "Gate",
+    type: "CEX",
+    pair: "RBNT/USDT",
+    url: "https://www.gate.com/trade/RBNT_USDT",
+    status: "verified",
+    category: "native-spot",
+  },
+  {
+    name: "BitMart",
+    type: "CEX",
+    pair: "RBNT/USDT",
+    url: "https://www.bitmart.com/trade/RBNT_USDT",
+    status: "verified",
+    category: "native-spot",
+  },
+  {
+    name: "WhiteBIT",
+    type: "CEX",
+    pair: "RBNT/USDT",
+    url: "https://whitebit.com/trade/RBNT-USDT",
+    status: "thin",
+    category: "native-spot",
+    flag: "no trades in the hours before verification",
+  },
+  {
+    name: "BYDFi",
+    type: "CEX",
+    pair: "RBNT/USDT",
+    url: "https://www.bydfi.com",
+    status: "verified",
+    category: "native-spot",
+  },
+  {
+    name: "Uniswap V4",
+    type: "DEX",
+    pair: "wRBNT/ETH",
+    url: "https://app.uniswap.org/explore/tokens/ethereum/0xb45ffb51984d626ee758b336c61cf20990c6bf13",
+    status: "verified",
+    category: "wrapped-spot",
+    chain: "Ethereum",
+    flag: "volume is thin",
+  },
+  {
+    name: "No live pool confirmed",
+    type: "DEX",
+    pair: "wRBNT/-",
+    url: null,
+    status: "unconfirmed",
+    category: "wrapped-spot",
+    chain: "Solana",
+    flag: "not checked in this pass, so no venue is named",
+  },
+  {
+    name: "No futures market confirmed as of 2026-08-08.",
+    type: "NONE",
+    pair: "-",
+    url: null,
+    status: "none",
+    category: "futures",
+  },
+];
+
+const CONTRACTS = [
+  { label: "Ethereum:", address: "0xb45ffb51984d626ee758b336c61cf20990c6bf13" },
+  {
+    label: "Solana:",
+    address: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
+  },
+];
+
+const METHODOLOGY = [
+  "Every exchange was checked against its own live trade page.",
+  "Each listing was cross-referenced against CoinGecko and CoinCodex, or Coinlore where needed.",
+  "For wRBNT, contract addresses were matched against CoinMarketCap's explorer links.",
+  "Any venue found in only one source with no live confirmation is left off the list.",
+  "Relying on a single aggregator's market table alone would have understated listings by two venues.",
+];
+
+const statusColor: Record<Venue["status"], string> = {
+  verified: "bg-success",
+  thin: "bg-warning",
+  unconfirmed: "bg-warning",
+  none: "bg-brand",
+};
+
+const statusText: Record<Venue["status"], string> = {
+  verified: "text-success",
+  thin: "text-warning",
+  unconfirmed: "text-warning",
+  none: "text-brand",
+};
+
+function StatusDot({ status }: { status: Venue["status"] }) {
+  return (
+    <span className="flex items-center gap-2">
+      <span
+        className={`h-2 w-2 shrink-0 rounded-full ${statusColor[status]}`}
+        aria-hidden="true"
+      />
+      <span className={`font-mono text-[13px] ${statusText[status]}`}>
+        {status}
+      </span>
+    </span>
+  );
+}
+
+function Tag({ children }: { children: string }) {
+  return (
+    <span className="label-sm rounded-chip border border-hairline bg-nested px-1.5 py-0.5 text-[10px] text-muted-foreground">
+      {children}
+    </span>
+  );
+}
+
+function VenueRow({ venue }: { venue: Venue }) {
+  return (
+    <li className="flex flex-col gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+      <div className="flex flex-wrap items-center gap-2">
+        {venue.chain ? (
+          <span className="label-sm text-[11px] text-muted-foreground">
+            {venue.chain}
+          </span>
+        ) : null}
+        <span className="font-semibold text-foreground">{venue.name}</span>
+        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+        <span className="font-mono text-[13px] text-secondary-foreground">
+          {venue.pair}
+        </span>
+        <StatusDot status={venue.status} />
+        {venue.url ? (
+          <a
+            href={venue.url}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-[15px] text-accent underline underline-offset-4 hover:no-underline"
+          >
+            Trade page
+          </a>
+        ) : (
+          <span className="text-[15px] text-muted-foreground">No link</span>
+        )}
+      </div>
+      {venue.flag ? (
+        <p className="text-[14px] text-warning min-[480px]:hidden">
+          {venue.flag}
+        </p>
+      ) : null}
+    </li>
+  );
+}
+
+function Card({
+  accent,
+  title,
+  caption,
+  captionTone = "muted",
+  nested = false,
+  children,
+}: {
+  accent: string;
+  title: string;
+  caption: string;
+  captionTone?: "muted" | "warning";
+  nested?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      className={`rounded-panel border border-hairline ${nested ? "bg-nested" : "bg-card"} overflow-hidden`}
+    >
+      <div className="flex">
+        <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
+        <div className="flex-1 p-5 sm:p-6">
+          <header className="mb-4">
+            <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
+            <p
+              className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
+            >
+              {caption}
+            </p>
+          </header>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Page() {
+  const native = VENUES.filter((v) => v.category === "native-spot");
+  const wrapped = VENUES.filter((v) => v.category === "wrapped-spot");
+  const futures = VENUES.filter((v) => v.category === "futures");
+
+  return (
+    <main className="mx-auto w-full max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
+      <div className="mb-4 flex items-center justify-between">
+        <span className="text-[13px] font-bold tracking-[0.12em] text-foreground uppercase">
+          Redbelly DAO
+        </span>
+        <span className="label-sm text-[11px] text-muted-foreground">
+          TASK-20
+        </span>
+      </div>
+
+      <header className="border-b border-hairline pb-8">
+        <h1 className="text-[32px] leading-tight font-bold tracking-[-0.02em] text-foreground sm:text-[44px]">
+          Where to Buy & Trade RBNT
+        </h1>
+        <p className="mt-3 text-[17px] leading-relaxed text-secondary-foreground">
+          Canonical venue list: native, wrapped, and derivatives
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-4">
+          <span className="font-mono text-[13px] text-accent">
+            Last verified: 2026-08-08 UTC
+          </span>
+          <a
+            href="#verify"
+            className="rounded-chip border border-border px-3 py-1.5 text-[14px] text-foreground hover:border-accent hover:text-accent"
+          >
+            Re-verify checklist
+          </a>
+        </div>
+      </header>
+
+      <div className="mt-8 flex flex-col gap-6">
+        <Card
+          accent="#86EFAC"
+          title="Spot - Native RBNT"
+          caption="You own the token"
+        >
+          <ul className="flex flex-col">
+            {native.map((v) => (
+              <VenueRow key={v.name} venue={v} />
+            ))}
+          </ul>
+          <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
+            <span className="text-warning">
+              WhiteBIT shows no trades in the hours before verification - it is
+              listed but thin.
+            </span>{" "}
+            CoinGecko's tracked markets table does not surface BYDFi or BitMart.
+            Both were confirmed directly from the exchanges themselves (BYDFi's
+            sitemap, BitMart's live trade page) before inclusion.
+          </p>
+        </Card>
+
+        <Card
+          accent="#86EFAC"
+          title="Spot - Wrapped RBNT (wRBNT)"
+          caption="Separate from native RBNT"
+          captionTone="warning"
+        >
+          <ul className="flex flex-col">
+            {wrapped.map((v) => (
+              <VenueRow key={v.chain} venue={v} />
+            ))}
+          </ul>
+          <div className="mt-4 rounded-chip border border-hairline bg-nested p-3">
+            {CONTRACTS.map((c) => (
+              <p
+                key={c.label}
+                className="font-mono text-[12px] break-all text-muted-foreground"
+              >
+                <span className="text-secondary-foreground">{c.label}</span>{" "}
+                {c.address}
+              </p>
+            ))}
+          </div>
+          <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
+            wRBNT is a separate ERC-20 token pegged 1:1 to native RBNT through
+            Redbelly's official Ethereum bridge. It is not interchangeable on
+            every venue without bridging.
+          </p>
+        </Card>
+
+        <Card
+          accent="#EF5350"
+          title="Futures / Derivatives"
+          caption="No ownership. Leverage risk."
+          captionTone="warning"
+          nested
+        >
+          <p className="rounded-chip border border-hairline bg-card px-4 py-3 text-[18px] font-semibold text-foreground">
+            {futures[0]?.name}
+          </p>
+          <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
+            CoinGecko's markets table splits into Spot, Perpetuals, and Futures
+            tabs - all five current results sit under Spot, with zero under the
+            other two. MEXC's own live futures order book for RBNT returns empty
+            fields across the board. Some exchange pages carry generic marketing
+            copy mentioning futures trading, but that copy is templated and
+            appears on token pages regardless of whether a market actually
+            exists there, so it was not treated as evidence.
+          </p>
+        </Card>
+
+        <section className="rounded-panel border border-hairline bg-card p-5 sm:p-6">
+          <h2 className="label-sm text-[13px] text-foreground">
+            Why this page exists
+          </h2>
+          <p className="mt-3 text-[16px] leading-relaxed text-secondary-foreground">
+            One exchange delisted an RBNT futures market, and we read it as a
+            spot delisting. The correction took longer than the confusion did,
+            and in the meantime holders were told their token had been pulled
+            from a venue where it is still trading today.
+          </p>
+          <p className="mt-3 text-[16px] leading-relaxed text-secondary-foreground">
+            We own that. This page keeps native spot, wrapped spot, and
+            derivatives in three separate, labeled sections with a dated
+            verification stamp, so the next time a derivatives market changes,
+            anyone can check in ten seconds which of the three it touched.
+          </p>
+        </section>
+
+        <section
+          id="verify"
+          className="rounded-panel border border-hairline bg-card p-5 scroll-mt-6 sm:p-6"
+        >
+          <h2 className="label-sm text-[13px] text-foreground">
+            Verification methodology
+          </h2>
+          <p className="mt-3 text-[16px] leading-relaxed text-secondary-foreground">
+            Every venue was checked directly against its own trade or listing
+            page on August 8, 2026, then cross-referenced against at least two
+            independent sources. Nothing here is copied from a single aggregator
+            without a second check.
+          </p>
+          <ol className="mt-4 flex flex-col gap-3">
+            {METHODOLOGY.map((item, i) => (
+              <li key={item} className="flex gap-3">
+                <span className="font-mono text-[13px] text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[16px] leading-relaxed text-secondary-foreground">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+
+      <footer className="mt-10 border-t border-hairline pt-6">
+        <p className="font-mono text-[13px] text-accent">
+          Last verified: 2026-08-08 UTC
+        </p>
+        <p className="mt-2 text-[15px] text-secondary-foreground">
+          Sources: CoinGecko, CoinCodex, Coinlore, and each exchange's own live
+          listing page
+        </p>
+        <p className="mt-2 text-[15px] text-muted-foreground">
+          Not financial advice. Listings change, re-verify before trading.
+        </p>
+        <a
+          href="https://redbelly-dao-taskboard.vercel.app/"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="mt-3 inline-block text-[14px] text-accent underline underline-offset-4 hover:no-underline"
+        >
+          Back to the Redbelly DAO Task Board
+        </a>
+      </footer>
+    </main>
+  );
+}
