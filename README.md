@@ -7,7 +7,7 @@ that gap for someone to assume one exists.
 
 ## Files
 
-- `Where_to_Buy_and_Trade_RBNT.docx` / `.pdf`  the companion document, styled to
+- `[Where_to_Buy_and_Trade_RBNT.docx](https://github.com/poundeater/redbellydao/blob/main/Where_to_Buy_and_Trade_RBNT.docx)` / `[.pdf](https://github.com/poundeater/redbellydao/blob/main/Where_to_Buy_and_Trade_RBNT.pdf)`  the companion document, styled to
   the Task Board brand kit (light theme).
 - `lovable-prompt.md`  the prompt used to generate the graphic, both export sizes
   (1080x1080 for X, 1200x630 for Discord).
