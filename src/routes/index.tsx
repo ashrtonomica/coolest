@@ -165,7 +165,7 @@ function Tag({ children }: { children: string }) {
 
 function VenueRow({ venue }: { venue: Venue }) {
   return (
-    <li className="flex flex-col gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+    <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
       <div className="flex flex-wrap items-center gap-2">
         {venue.chain ? (
           <span className="label-sm text-[11px] text-muted-foreground">
@@ -194,7 +194,7 @@ function VenueRow({ venue }: { venue: Venue }) {
         )}
       </div>
       {venue.flag ? (
-        <p className="text-[14px] text-warning min-[480px]:hidden">
+        <p className="text-[14px] text-warning">
           {venue.flag}
         </p>
       ) : null}
