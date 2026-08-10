@@ -338,8 +338,9 @@ function NativeVenueRow({
     <li
       className="grid items-center border-b border-hairline py-3 last:border-b-0"
       style={{
-        gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px 110px",
-        columnGap: 16,
+        gridTemplateColumns:
+          "minmax(120px, 1fr) 52px 110px 100px 130px minmax(90px, auto)",
+        columnGap: 12,
       }}
     >
       <div className="flex items-center gap-2 whitespace-nowrap">
@@ -364,14 +365,15 @@ function NativeVenueRow({
           </span>
         ) : null}
         <span className="font-semibold text-foreground">{venue.name}</span>
-        <span className="rounded-chip border border-hairline bg-nested px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
-          {venue.type === "NONE" ? "SPOT ONLY" : venue.type}
-        </span>
       </div>
+      <span className="inline-flex w-fit rounded-chip border border-hairline bg-nested px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+        {venue.type === "NONE" ? "SPOT ONLY" : venue.type}
+      </span>
       <span className="font-mono text-[13px] text-secondary-foreground">
         {venue.pair}
       </span>
       <NativeStatusBadge status={venue.status} />
+
       <div className="justify-self-end">
         {venue.url ? (
           <TradeButton href={venue.url} />
