@@ -144,9 +144,32 @@ const statusText: Record<Venue["status"], string> = {
   none: "text-brand",
 };
 
+const statusBorderColor: Record<Venue["status"], string> = {
+  verified: "border-success",
+  thin: "border-warning",
+  unconfirmed: "border-warning",
+  none: "border-brand",
+};
+
 function StatusDot({ status }: { status: Venue["status"] }) {
   return (
     <span className="flex items-center gap-2">
+      <span
+        className={`h-2 w-2 shrink-0 rounded-full ${statusColor[status]}`}
+        aria-hidden="true"
+      />
+      <span className={`font-mono text-[13px] ${statusText[status]}`}>
+        {status}
+      </span>
+    </span>
+  );
+}
+
+function NativeStatusBadge({ status }: { status: Venue["status"] }) {
+  return (
+    <span
+      className={`inline-flex items-center justify-center gap-2 rounded border bg-card px-2.5 py-1 min-w-[90px] ${statusBorderColor[status]}`}
+    >
       <span
         className={`h-2 w-2 shrink-0 rounded-full ${statusColor[status]}`}
         aria-hidden="true"
@@ -243,6 +266,51 @@ function VenueRow({ venue }: { venue: Venue }) {
           {venue.flag}
         </p>
       ) : null}
+    </li>
+  );
+}
+
+function NativeVenueRow({ venue }: { venue: Venue }) {
+  return (
+    <li
+      className="grid items-center border-b border-hairline py-3 last:border-b-0"
+      style={{ gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px", columnGap: 16 }}
+    >
+      <div className="flex items-center gap-2 whitespace-nowrap">
+        {venue.logo ? (
+          <img
+            src={venue.logo}
+            alt=""
+            className="shrink-0"
+            width={24}
+            height={24}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: "contain",
+              objectPosition: "center",
+            }}
+          />
+        ) : null}
+        {venue.chain ? (
+          <span className="label-sm text-[11px] text-muted-foreground">
+            {venue.chain}
+          </span>
+        ) : null}
+        <span className="font-semibold text-foreground">{venue.name}</span>
+        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
+      </div>
+      <span className="font-mono text-[13px] text-secondary-foreground">
+        {venue.pair}
+      </span>
+      <NativeStatusBadge status={venue.status} />
+      <div className="justify-self-end">
+        {venue.url ? (
+          <TradeButton href={venue.url} />
+        ) : (
+          <span className="text-[15px] text-muted-foreground">No link</span>
+        )}
+      </div>
     </li>
   );
 }
