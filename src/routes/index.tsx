@@ -500,7 +500,11 @@ function Page() {
           <ul className="flex flex-col">
             {native.map((v) => (
               <Fragment key={v.name}>
-                <NativeVenueRow venue={v} />
+                <NativeVenueRow
+                  venue={v}
+                  price={prices[v.name.toLowerCase()]}
+                  connected={connected}
+                />
                 {v.name === "WhiteBIT" ? (
                   <li className="list-none">
                     <WhitebitCallout />
