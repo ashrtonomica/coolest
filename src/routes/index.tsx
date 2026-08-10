@@ -3,11 +3,13 @@ import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
 import ethereumLogo from "../ethereum-eth-logo.png";
 import baseLogo from "../Base_square_blue.png";
-import solanaLogo from "../solanaLogo.png";
+import solanaLogo from "../solana-sol-logo.png";
 import inchLogo from "../1inch.png";
 import bitgetLogo from "../bitget.png";
 import kyberswapLogo from "../kyberswap.png";
 import raydiumLogo from "../raydium.png";
+import okxLogo from "../OKX_id7gsDJl-c_0.png";
+import rbntLogo from "../rbnt.png";
 import wrbntLogo from "../wrbnt.png";
 import reddexLogo from "../reddex.png";
 
@@ -139,6 +141,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "OKX DEX",
         url: "https://web3.okx.com/dex-swap?chain=ethereum,ethereum&token=0xb45ffb51984d626ee758b336c61cf20990c6bf13,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        logo: okxLogo,
       },
       {
         name: "Bitget",
@@ -168,6 +171,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "OKX DEX",
         url: "https://web3.okx.com/dex-swap?chain=base,base&token=0x020940df9f5e77338a094d55b5b5914122a804a5,0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+        logo: okxLogo,
       },
       {
         name: "Bitget",
@@ -409,10 +413,10 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                     <img
                       src={v.logo}
                       alt=""
-                      width={18}
-                      height={18}
+                      width={20}
+                      height={20}
                       className="shrink-0 rounded-full"
-                      style={{ width: 18, height: 18, objectFit: "contain" }}
+                      style={{ width: 20, height: 20, objectFit: "contain" }}
                     />
                   ) : null}
                   {v.name}
@@ -725,6 +729,14 @@ function Page() {
           <ul className="flex flex-col">
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-wrap items-center gap-2">
+                <img
+                  src={rbntLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0 rounded-full"
+                  style={{ width: 20, height: 20, objectFit: "contain" }}
+                />
                 <span className="font-semibold text-foreground">RBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   RBNT/USDC.e
@@ -775,7 +787,7 @@ function Page() {
         <Card title="Bridges">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="font-semibold text-foreground">
+              <h3 className="text-[16px] font-semibold leading-tight text-foreground">
                 Lucid Labs Bridge
               </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
@@ -792,7 +804,7 @@ function Page() {
               </div>
             </div>
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="font-semibold text-foreground">reddex Bridge</h3>
+              <h3 className="text-[16px] font-semibold leading-tight text-foreground">reddex Bridge</h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
                 Official route for bridging USDC and USDT into Redbelly
                 Network. Runs on the same Lucid Labs / Polymer infrastructure.
