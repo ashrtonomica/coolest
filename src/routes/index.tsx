@@ -455,7 +455,9 @@ function Card({
       className={`rounded-panel border border-hairline ${nested ? "bg-nested" : "bg-card"} overflow-hidden`}
     >
       <div className="flex">
-        <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
+        {accent ? (
+          <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
+        ) : null}
         <div className="flex-1 p-5 sm:p-6">
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
