@@ -804,7 +804,7 @@ function Page() {
               </div>
             </div>
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="font-semibold text-foreground">reddex Bridge</h3>
+              <h3 className="text-[16px] font-semibold leading-tight text-foreground">reddex Bridge</h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
                 Official route for bridging USDC and USDT into Redbelly
                 Network. Runs on the same Lucid Labs / Polymer infrastructure.
