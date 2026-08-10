@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
+import ethereumLogo from "../ethereum-eth-logo.png";
+import baseLogo from "../Base_square_blue.png";
+import solanaLogo from "../solanaLogo.png";
+import inchLogo from "../1inch.png";
+import bitgetLogo from "../bitget.png";
+import kyberswapLogo from "../kyberswap.png";
+import raydiumLogo from "../raydium.png";
+import wrbntLogo from "../wrbnt.png";
+import reddexLogo from "../reddex.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -98,6 +107,7 @@ const VENUES: Venue[] = [
 type ChainDexVenue = {
   name: string;
   url: string;
+  logo?: string;
 };
 
 type ChainGroup = {
@@ -108,6 +118,7 @@ type ChainGroup = {
   severity: "low" | "medium" | "high";
   note?: string;
   unusableNote?: string;
+  logo?: string;
   venues: ChainDexVenue[];
 };
 
@@ -118,10 +129,12 @@ const CHAIN_GROUPS: ChainGroup[] = [
     contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
     impact: "100k: 1.51-2.87% | 1M: 13-14%",
     severity: "medium",
+    logo: ethereumLogo,
     venues: [
       {
         name: "1inch",
         url: "https://1inch.com/swap?src=1:0xb45ffb51984d626ee758b336c61cf20990c6bf13&dst=1:USDT",
+        logo: inchLogo,
       },
       {
         name: "OKX DEX",
@@ -130,6 +143,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "Bitget",
         url: "https://web3.bitget.com/en/swap/eth/0xb45fFB51984d626Ee758b336C61Cf20990c6bF13",
+        logo: bitgetLogo,
       },
     ],
   },
@@ -139,14 +153,17 @@ const CHAIN_GROUPS: ChainGroup[] = [
     contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
     impact: "1M: 7.88-8.04% | 100k: 13.36%",
     severity: "medium",
+    logo: baseLogo,
     venues: [
       {
         name: "KyberSwap",
         url: "https://kyberswap.com/swap/base/0x020940df9f5e77338a094d55b5b5914122a804a5-to-usdc",
+        logo: kyberswapLogo,
       },
       {
         name: "1inch",
         url: "https://1inch.com/swap?src=8453:0x020940df9f5e77338a094d55b5b5914122a804a5&dst=8453:USDC",
+        logo: inchLogo,
       },
       {
         name: "OKX DEX",
@@ -155,6 +172,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "Bitget",
         url: "https://web3.bitget.com/en/swap/base/0x020940df9F5E77338a094D55b5B5914122a804A5",
+        logo: bitgetLogo,
       },
     ],
   },
@@ -166,10 +184,12 @@ const CHAIN_GROUPS: ChainGroup[] = [
     severity: "high",
     note: "No live pool confirmed - status unconfirmed.",
     unusableNote: "effectively unusable at this size",
+    logo: solanaLogo,
     venues: [
       {
         name: "Raydium",
         url: "https://raydium.io/swap/?inputMint=2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        logo: raydiumLogo,
       },
     ],
   },
@@ -339,6 +359,16 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         aria-expanded={open}
         className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
       >
+        {group.logo ? (
+          <img
+            src={group.logo}
+            alt=""
+            width={20}
+            height={20}
+            className="shrink-0 rounded-full"
+            style={{ width: 20, height: 20, objectFit: "contain" }}
+          />
+        ) : null}
         <span className="font-semibold text-foreground">{group.chain}</span>
         <span className="font-mono text-[13px] text-secondary-foreground">
           {group.pair}
@@ -374,7 +404,19 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                 key={v.name}
                 className="flex items-center justify-between gap-3 border-b border-hairline py-2.5 last:border-b-0"
               >
-                <span className="text-[15px] text-foreground">{v.name}</span>
+                <span className="flex items-center gap-2 text-[15px] text-foreground">
+                  {v.logo ? (
+                    <img
+                      src={v.logo}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className="shrink-0 rounded-full"
+                      style={{ width: 18, height: 18, objectFit: "contain" }}
+                    />
+                  ) : null}
+                  {v.name}
+                </span>
                 <TradeLink href={v.url} />
               </li>
             ))}
@@ -660,7 +702,6 @@ function Page() {
         </Card>
 
         <Card
-          accent="#86EFAC"
           title="Spot - Wrapped RBNT (wRBNT)"
           caption="Separate from native RBNT"
           captionTone="warning"
@@ -696,6 +737,14 @@ function Page() {
             </li>
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-wrap items-center gap-2">
+                <img
+                  src={wrbntLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0 rounded-full"
+                  style={{ width: 20, height: 20, objectFit: "contain" }}
+                />
                 <span className="font-semibold text-foreground">WRBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
@@ -711,6 +760,14 @@ function Page() {
             </li>
           </ul>
           <p className="mt-4 text-[14px] text-muted-foreground">
+            <img
+              src={reddexLogo}
+              alt=""
+              width={20}
+              height={20}
+              className="mr-2 inline-block align-[-4px] rounded-full"
+              style={{ width: 20, height: 20, objectFit: "contain" }}
+            />
             reddex is the official liquidity hub for Redbelly Network.
           </p>
         </Card>
