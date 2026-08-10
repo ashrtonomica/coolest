@@ -262,48 +262,131 @@ function TradeButton({ href }: { href: string }) {
   );
 }
 
-function VenueRow({ venue }: { venue: Venue }) {
+const IMPACT_COLORS: Record<ChainGroup["severity"], string> = {
+  low: "#86EFAC",
+  medium: "#FCD34D",
+  high: "#F87171",
+};
+
+function ImpactBadge({
+  severity,
+  children,
+}: {
+  severity: ChainGroup["severity"];
+  children: string;
+}) {
+  const color = IMPACT_COLORS[severity];
   return (
-    <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-      <div className="flex flex-wrap items-center gap-2">
-        {venue.logo ? (
-          <img
-            src={venue.logo}
-            alt=""
-            className="shrink-0"
-            width={24}
-            height={24}
-            style={{
-              width: 24,
-              height: 24,
-              objectFit: "contain",
-              objectPosition: "center",
-            }}
-          />
-        ) : null}
-        {venue.chain ? (
-          <span className="label-sm text-[11px] text-muted-foreground">
-            {venue.chain}
-          </span>
-        ) : null}
-        <span className="font-semibold text-foreground">{venue.name}</span>
-        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
-      </div>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+    <span
+      className="inline-flex items-center gap-1.5 rounded border px-2.5 py-1 font-mono text-[11px]"
+      style={{ backgroundColor: "#1e2a31", borderColor: color, color }}
+    >
+      {severity === "high" ? (
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+        </svg>
+      ) : null}
+      {children}
+    </span>
+  );
+}
+
+function TradeLink({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent underline-offset-4 hover:underline"
+    >
+      Trade Now
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    </a>
+  );
+}
+
+function ChainGroupRow({ group }: { group: ChainGroup }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <li className="border-b border-hairline py-3 last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
+      >
+        <span className="font-semibold text-foreground">{group.chain}</span>
         <span className="font-mono text-[13px] text-secondary-foreground">
-          {venue.pair}
+          {group.pair}
         </span>
-        <StatusDot status={venue.status} />
-        {venue.url ? (
-          <TradeButton href={venue.url} />
-        ) : (
-          <span className="text-[15px] text-muted-foreground">No link</span>
-        )}
-      </div>
-      {venue.flag ? (
-        <p className="text-[14px] text-warning">
-          {venue.flag}
-        </p>
+        <ImpactBadge severity={group.severity}>{group.impact}</ImpactBadge>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className={`ml-auto shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      {group.note ? (
+        <p className="mt-1.5 text-[14px] text-warning">{group.note}</p>
+      ) : null}
+      {open ? (
+        <div className="mt-2 rounded-chip border border-hairline bg-nested p-3">
+          <p className="font-mono text-[12px] break-all text-muted-foreground">
+            <span className="text-secondary-foreground">Contract:</span>{" "}
+            {group.contract}
+          </p>
+          <ul className="mt-1 flex flex-col">
+            {group.venues.map((v) => (
+              <li
+                key={v.name}
+                className="flex items-center justify-between gap-3 border-b border-hairline py-2.5 last:border-b-0"
+              >
+                <span className="text-[15px] text-foreground">{v.name}</span>
+                <TradeLink href={v.url} />
+              </li>
+            ))}
+          </ul>
+          {group.unusableNote ? (
+            <p className="pt-2 text-[14px]" style={{ color: "#F87171" }}>
+              {group.unusableNote}
+            </p>
+          ) : null}
+        </div>
       ) : null}
     </li>
   );
