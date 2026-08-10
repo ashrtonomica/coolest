@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { type ReactNode, Fragment } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,6 +25,12 @@ export const Route = createFileRoute("/")({
           "Canonical venue list for RBNT: native spot, wrapped spot, and derivatives.",
       },
     ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap",
+      },
+    ],
   }),
   component: Page,
 });
@@ -37,6 +44,7 @@ type Venue = {
   category: "native-spot" | "wrapped-spot" | "futures";
   chain?: string;
   flag?: string;
+  logo?: string;
 };
 
 const VENUES: Venue[] = [
@@ -47,6 +55,7 @@ const VENUES: Venue[] = [
     url: "https://www.mexc.com/exchange/RBNT_USDT",
     status: "verified",
     category: "native-spot",
+    logo: "/logos/mexc.jpg",
   },
   {
     name: "Gate",
@@ -55,6 +64,7 @@ const VENUES: Venue[] = [
     url: "https://www.gate.com/trade/RBNT_USDT",
     status: "verified",
     category: "native-spot",
+    logo: "/logos/gate.png",
   },
   {
     name: "BitMart",
@@ -71,7 +81,7 @@ const VENUES: Venue[] = [
     url: "https://whitebit.com/trade/RBNT-USDT",
     status: "thin",
     category: "native-spot",
-    flag: "no trades in the hours before verification",
+    logo: "/logos/whitebit.png",
   },
   {
     name: "BYDFi",
@@ -80,6 +90,7 @@ const VENUES: Venue[] = [
     url: "https://www.bydfi.com",
     status: "verified",
     category: "native-spot",
+    logo: "/logos/bydfi.png",
   },
   {
     name: "Uniswap V4",
@@ -163,10 +174,59 @@ function Tag({ children }: { children: string }) {
   );
 }
 
+function TradeButton({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="inline-flex items-center gap-1.5 rounded text-[14px] font-semibold text-white transition-opacity hover:opacity-90"
+      style={{
+        backgroundColor: "#EF5350",
+        padding: "6px 14px",
+        fontFamily: '"Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif',
+        fontWeight: 600,
+      }}
+    >
+      Trade Now
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    </a>
+  );
+}
+
 function VenueRow({ venue }: { venue: Venue }) {
   return (
     <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
       <div className="flex flex-wrap items-center gap-2">
+        {venue.logo ? (
+          <img
+            src={venue.logo}
+            alt=""
+            className="shrink-0"
+            width={24}
+            height={24}
+            style={{
+              width: 24,
+              height: 24,
+              objectFit: "contain",
+              objectPosition: "center",
+            }}
+          />
+        ) : null}
         {venue.chain ? (
           <span className="label-sm text-[11px] text-muted-foreground">
             {venue.chain}
@@ -181,14 +241,7 @@ function VenueRow({ venue }: { venue: Venue }) {
         </span>
         <StatusDot status={venue.status} />
         {venue.url ? (
-          <a
-            href={venue.url}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-[15px] text-accent underline underline-offset-4 hover:no-underline"
-          >
-            Trade page
-          </a>
+          <TradeButton href={venue.url} />
         ) : (
           <span className="text-[15px] text-muted-foreground">No link</span>
         )}
@@ -199,6 +252,41 @@ function VenueRow({ venue }: { venue: Venue }) {
         </p>
       ) : null}
     </li>
+  );
+}
+
+function WhitebitCallout() {
+  return (
+    <div
+      className="mt-2 flex items-start gap-3 text-[16px] leading-[1.5]"
+      style={{
+        backgroundColor: "#1e2a31",
+        border: "1px solid #FCD34D",
+        borderLeft: "3px solid #FCD34D",
+        borderRadius: "4px",
+        padding: "10px 14px",
+        color: "#e4ebf0",
+      }}
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#FCD34D"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="mt-1 shrink-0"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="16" x2="12" y2="12" />
+        <line x1="12" y1="8" x2="12.01" y2="8" />
+      </svg>
+      WhiteBIT shows no trades in the hours before verification - it is listed
+      but thin.
+    </div>
   );
 }
 
@@ -215,7 +303,7 @@ function Card({
   caption: string;
   captionTone?: "muted" | "warning";
   nested?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section
@@ -283,14 +371,17 @@ function Page() {
         >
           <ul className="flex flex-col">
             {native.map((v) => (
-              <VenueRow key={v.name} venue={v} />
+              <Fragment key={v.name}>
+                <VenueRow venue={v} />
+                {v.name === "WhiteBIT" ? (
+                  <li className="list-none">
+                    <WhitebitCallout />
+                  </li>
+                ) : null}
+              </Fragment>
             ))}
           </ul>
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
-            <span className="text-warning">
-              WhiteBIT shows no trades in the hours before verification - it is
-              listed but thin.
-            </span>{" "}
             CoinGecko's tracked markets table does not surface BYDFi or BitMart.
             Both were confirmed directly from the exchanges themselves (BYDFi's
             sitemap, BitMart's live trade page) before inclusion.
