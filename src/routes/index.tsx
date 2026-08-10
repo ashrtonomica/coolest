@@ -512,13 +512,9 @@ function Page() {
       </header>
 
       <div className="mt-8 flex flex-col gap-6">
-        <Card
-          accent="#86EFAC"
-          title="Spot - Native RBNT"
-          caption="You own the token"
-        >
+        <Card title="Spot - Native RBNT" caption="You own the token">
           <div className="-mx-1 overflow-x-auto px-1">
-            <ul className="grid w-full min-w-[820px] grid-cols-[minmax(160px,1fr)_60px_110px_100px_130px_170px] gap-x-3 gap-y-0">
+            <ul className="grid w-full min-w-[860px] grid-cols-[minmax(150px,1fr)_60px_110px_100px_130px_minmax(130px,auto)] gap-x-3 gap-y-0">
               {native.map((v) => (
                 <Fragment key={v.name}>
                   <NativeVenueRow
