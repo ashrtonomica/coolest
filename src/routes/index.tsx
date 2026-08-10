@@ -204,20 +204,6 @@ const statusBorderColor: Record<Venue["status"], string> = {
   none: "border-brand",
 };
 
-function StatusDot({ status }: { status: Venue["status"] }) {
-  return (
-    <span className="flex items-center gap-2">
-      <span
-        className={`h-2 w-2 shrink-0 rounded-full ${statusColor[status]}`}
-        aria-hidden="true"
-      />
-      <span className={`font-mono text-[13px] ${statusText[status]}`}>
-        {status}
-      </span>
-    </span>
-  );
-}
-
 function NativeStatusBadge({ status }: { status: Venue["status"] }) {
   return (
     <span
