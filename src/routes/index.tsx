@@ -129,10 +129,12 @@ const CHAIN_GROUPS: ChainGroup[] = [
     contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
     impact: "100k: 1.51-2.87% | 1M: 13-14%",
     severity: "medium",
+    logo: ethereumLogo,
     venues: [
       {
         name: "1inch",
         url: "https://1inch.com/swap?src=1:0xb45ffb51984d626ee758b336c61cf20990c6bf13&dst=1:USDT",
+        logo: inchLogo,
       },
       {
         name: "OKX DEX",
@@ -141,6 +143,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "Bitget",
         url: "https://web3.bitget.com/en/swap/eth/0xb45fFB51984d626Ee758b336C61Cf20990c6bF13",
+        logo: bitgetLogo,
       },
     ],
   },
@@ -150,14 +153,17 @@ const CHAIN_GROUPS: ChainGroup[] = [
     contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
     impact: "1M: 7.88-8.04% | 100k: 13.36%",
     severity: "medium",
+    logo: baseLogo,
     venues: [
       {
         name: "KyberSwap",
         url: "https://kyberswap.com/swap/base/0x020940df9f5e77338a094d55b5b5914122a804a5-to-usdc",
+        logo: kyberswapLogo,
       },
       {
         name: "1inch",
         url: "https://1inch.com/swap?src=8453:0x020940df9f5e77338a094d55b5b5914122a804a5&dst=8453:USDC",
+        logo: inchLogo,
       },
       {
         name: "OKX DEX",
@@ -166,6 +172,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "Bitget",
         url: "https://web3.bitget.com/en/swap/base/0x020940df9F5E77338a094D55b5B5914122a804A5",
+        logo: bitgetLogo,
       },
     ],
   },
@@ -177,10 +184,12 @@ const CHAIN_GROUPS: ChainGroup[] = [
     severity: "high",
     note: "No live pool confirmed - status unconfirmed.",
     unusableNote: "effectively unusable at this size",
+    logo: solanaLogo,
     venues: [
       {
         name: "Raydium",
         url: "https://raydium.io/swap/?inputMint=2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        logo: raydiumLogo,
       },
     ],
   },
