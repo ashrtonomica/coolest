@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { type ReactNode, Fragment } from "react";
+import { useRbntPrices } from "@/hooks/useRbntPrices";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/")({
     links: [
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
       },
     ],
   }),
@@ -270,11 +271,76 @@ function VenueRow({ venue }: { venue: Venue }) {
   );
 }
 
-function NativeVenueRow({ venue }: { venue: Venue }) {
+const MONO_STACK = '"JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
+
+function isFiatQuote(pair: string) {
+  const quote = pair.split("/")[1]?.toUpperCase() ?? "";
+  return ["USDT", "USDC", "USD", "EUR", "BUSD", "DAI"].includes(quote);
+}
+
+function PriceCell({
+  venue,
+  price,
+  connected,
+}: {
+  venue: Venue;
+  price: string | null | undefined;
+  connected: boolean;
+}) {
+  const baseStyle = {
+    fontFamily: MONO_STACK,
+    fontSize: 14,
+  } as const;
+
+  if (venue.name === "BYDFi") {
+    return (
+      <span
+        className="justify-self-end text-right"
+        style={{ ...baseStyle, color: "#93a4ae" }}
+      >
+        Check exchange
+      </span>
+    );
+  }
+
+  if (price == null) {
+    return (
+      <span
+        className="justify-self-end text-right"
+        style={{ ...baseStyle, color: "#6b7a85" }}
+      >
+        {connected ? "-" : "-"}
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className="justify-self-end text-right"
+      style={{ ...baseStyle, color: connected ? "#e4ebf0" : "#6b7a85" }}
+    >
+      {isFiatQuote(venue.pair) ? "$" : ""}
+      {price}
+    </span>
+  );
+}
+
+function NativeVenueRow({
+  venue,
+  price,
+  connected,
+}: {
+  venue: Venue;
+  price?: string | null;
+  connected: boolean;
+}) {
   return (
     <li
       className="grid items-center border-b border-hairline py-3 last:border-b-0"
-      style={{ gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px", columnGap: 16 }}
+      style={{
+        gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px 110px",
+        columnGap: 16,
+      }}
     >
       <div className="flex items-center gap-2 whitespace-nowrap">
         {venue.logo ? (
@@ -298,7 +364,9 @@ function NativeVenueRow({ venue }: { venue: Venue }) {
           </span>
         ) : null}
         <span className="font-semibold text-foreground">{venue.name}</span>
-        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
+        <span className="rounded-chip border border-hairline bg-nested px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+          {venue.type === "NONE" ? "SPOT ONLY" : venue.type}
+        </span>
       </div>
       <span className="font-mono text-[13px] text-secondary-foreground">
         {venue.pair}
@@ -311,6 +379,7 @@ function NativeVenueRow({ venue }: { venue: Venue }) {
           <span className="text-[15px] text-muted-foreground">No link</span>
         )}
       </div>
+      <PriceCell venue={venue} price={price} connected={connected} />
     </li>
   );
 }
@@ -388,6 +457,7 @@ function Card({
 }
 
 function Page() {
+  const { prices, connected } = useRbntPrices();
   const native = VENUES.filter((v) => v.category === "native-spot");
   const wrapped = VENUES.filter((v) => v.category === "wrapped-spot");
   const futures = VENUES.filter((v) => v.category === "futures");
@@ -432,7 +502,11 @@ function Page() {
           <ul className="flex flex-col">
             {native.map((v) => (
               <Fragment key={v.name}>
-                <NativeVenueRow venue={v} />
+                <NativeVenueRow
+                  venue={v}
+                  price={prices[v.name.toLowerCase()]}
+                  connected={connected}
+                />
                 {v.name === "WhiteBIT" ? (
                   <li className="list-none">
                     <WhitebitCallout />
