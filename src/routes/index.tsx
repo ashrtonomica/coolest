@@ -220,15 +220,13 @@ function NativeStatusBadge({ status }: { status: Venue["status"] }) {
   );
 }
 
-function Tag({ children }: { children: string }) {
-  return (
-    <span className="label-sm rounded-chip border border-hairline bg-nested px-1.5 py-0.5 text-[10px] text-muted-foreground">
-      {children}
-    </span>
-  );
-}
-
-function TradeButton({ href }: { href: string }) {
+function TradeButton({
+  href,
+  label = "Trade Now",
+}: {
+  href: string;
+  label?: string;
+}) {
   return (
     <a
       href={href}
@@ -242,7 +240,7 @@ function TradeButton({ href }: { href: string }) {
         fontWeight: 600,
       }}
     >
-      Trade Now
+      {label}
       <svg
         width="14"
         height="14"
