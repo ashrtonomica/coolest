@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { type ReactNode, Fragment } from "react";
+import { useRbntPrices } from "@/hooks/useRbntPrices";
 
 export const Route = createFileRoute("/")({
   head: () => ({
