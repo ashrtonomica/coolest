@@ -278,6 +278,29 @@ function isFiatQuote(pair: string) {
   return ["USDT", "USDC", "USD", "EUR", "BUSD", "DAI"].includes(quote);
 }
 
+function LiveLabel() {
+  return (
+    <span className="flex items-center justify-end gap-1.5">
+      <span
+        className="live-dot inline-block shrink-0 rounded-full"
+        style={{ width: 6, height: 6, backgroundColor: "#86EFAC" }}
+        aria-hidden="true"
+      />
+      <span
+        style={{
+          fontFamily: MONO_STACK,
+          fontSize: 10,
+          letterSpacing: "0.5px",
+          textTransform: "uppercase",
+          color: "#6b7a85",
+        }}
+      >
+        Live
+      </span>
+    </span>
+  );
+}
+
 function PriceCell({
   venue,
   price,
@@ -295,7 +318,7 @@ function PriceCell({
   if (venue.name === "BYDFi") {
     return (
       <span
-        className="justify-self-end whitespace-nowrap text-right"
+        className="justify-self-end overflow-visible whitespace-nowrap text-right"
         style={{ ...baseStyle, color: "#93a4ae" }}
       >
         Check exchange
@@ -303,26 +326,23 @@ function PriceCell({
     );
   }
 
-  if (price == null) {
-    return (
-      <span
-        className="justify-self-end whitespace-nowrap text-right"
-        style={{ ...baseStyle, color: "#6b7a85" }}
-      >
-        {connected ? "loading" : "offline"}
-      </span>
-    );
-  }
-
-
   return (
-    <span
-      className="justify-self-end whitespace-nowrap text-right"
-      style={{ ...baseStyle, color: connected ? "#e4ebf0" : "#6b7a85" }}
-    >
-      {isFiatQuote(venue.pair) ? "$" : ""}
-      {price}
-    </span>
+    <div className="flex min-w-[110px] flex-col items-end justify-self-end overflow-visible text-right">
+      <LiveLabel />
+      <span
+        className="whitespace-nowrap"
+        style={{
+          ...baseStyle,
+          color: price == null || !connected ? "#6b7a85" : "#e4ebf0",
+        }}
+      >
+        {price == null
+          ? connected
+            ? "loading"
+            : "offline"
+          : `${isFiatQuote(venue.pair) ? "$" : ""}${price}`}
+      </span>
+    </div>
   );
 }
 
