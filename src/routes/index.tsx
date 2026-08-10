@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
+import ethereumLogo from "../ethereum-eth-logo.png";
+import baseLogo from "../Base_square_blue.png";
+import solanaLogo from "../solanaLogo.png";
+import inchLogo from "../1inch.png";
+import bitgetLogo from "../bitget.png";
+import kyberswapLogo from "../kyberswap.png";
+import raydiumLogo from "../raydium.png";
+import wrbntLogo from "../wrbnt.png";
+import reddexLogo from "../reddex.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -98,6 +107,7 @@ const VENUES: Venue[] = [
 type ChainDexVenue = {
   name: string;
   url: string;
+  logo?: string;
 };
 
 type ChainGroup = {
@@ -108,6 +118,7 @@ type ChainGroup = {
   severity: "low" | "medium" | "high";
   note?: string;
   unusableNote?: string;
+  logo?: string;
   venues: ChainDexVenue[];
 };
 
