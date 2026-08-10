@@ -456,6 +456,7 @@ function Card({
 }
 
 function Page() {
+  const { prices, connected } = useRbntPrices();
   const native = VENUES.filter((v) => v.category === "native-spot");
   const wrapped = VENUES.filter((v) => v.category === "wrapped-spot");
   const futures = VENUES.filter((v) => v.category === "futures");
