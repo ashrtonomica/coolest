@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { type ReactNode, Fragment } from "react";
+import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
 
 export const Route = createFileRoute("/")({
@@ -86,26 +86,6 @@ const VENUES: Venue[] = [
     logo: "/logos/bydfi.png",
   },
   {
-    name: "Uniswap V4",
-    type: "DEX",
-    pair: "wRBNT/ETH",
-    url: "https://app.uniswap.org/explore/tokens/ethereum/0xb45ffb51984d626ee758b336c61cf20990c6bf13",
-    status: "verified",
-    category: "wrapped-spot",
-    chain: "Ethereum",
-    flag: "volume is thin",
-  },
-  {
-    name: "No live pool confirmed",
-    type: "DEX",
-    pair: "wRBNT/-",
-    url: null,
-    status: "unconfirmed",
-    category: "wrapped-spot",
-    chain: "Solana",
-    flag: "not checked in this pass, so no venue is named",
-  },
-  {
     name: "No futures market confirmed as of 2026-08-08.",
     type: "NONE",
     pair: "-",
@@ -115,11 +95,83 @@ const VENUES: Venue[] = [
   },
 ];
 
-const CONTRACTS = [
-  { label: "Ethereum:", address: "0xb45ffb51984d626ee758b336c61cf20990c6bf13" },
+type ChainDexVenue = {
+  name: string;
+  url: string;
+};
+
+type ChainGroup = {
+  chain: string;
+  pair: string;
+  contract: string;
+  impact: string;
+  severity: "low" | "medium" | "high";
+  note?: string;
+  unusableNote?: string;
+  venues: ChainDexVenue[];
+};
+
+const CHAIN_GROUPS: ChainGroup[] = [
   {
-    label: "Solana:",
-    address: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
+    chain: "Ethereum",
+    pair: "WRBNT/ETH",
+    contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
+    impact: "100k: 1.51-2.87% | 1M: 13-14%",
+    severity: "medium",
+    venues: [
+      {
+        name: "1inch",
+        url: "https://1inch.com/swap?src=1:0xb45ffb51984d626ee758b336c61cf20990c6bf13&dst=1:USDT",
+      },
+      {
+        name: "OKX DEX",
+        url: "https://web3.okx.com/dex-swap?chain=ethereum,ethereum&token=0xb45ffb51984d626ee758b336c61cf20990c6bf13,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      },
+      {
+        name: "Bitget",
+        url: "https://web3.bitget.com/en/swap/eth/0xb45fFB51984d626Ee758b336C61Cf20990c6bF13",
+      },
+    ],
+  },
+  {
+    chain: "Base",
+    pair: "RBNT/USDC",
+    contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
+    impact: "1M: 7.88-8.04% | 100k: 13.36%",
+    severity: "medium",
+    venues: [
+      {
+        name: "KyberSwap",
+        url: "https://kyberswap.com/swap/base/0x020940df9f5e77338a094d55b5b5914122a804a5-to-usdc",
+      },
+      {
+        name: "1inch",
+        url: "https://1inch.com/swap?src=8453:0x020940df9f5e77338a094d55b5b5914122a804a5&dst=8453:USDC",
+      },
+      {
+        name: "OKX DEX",
+        url: "https://web3.okx.com/dex-swap?chain=base,base&token=0x020940df9f5e77338a094d55b5b5914122a804a5,0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+      },
+      {
+        name: "Bitget",
+        url: "https://web3.bitget.com/en/swap/base/0x020940df9F5E77338a094D55b5B5914122a804A5",
+      },
+    ],
+  },
+  {
+    chain: "Solana",
+    pair: "WRBNT/-",
+    contract: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
+    impact: "10k: 86.77%",
+    severity: "high",
+    note: "No live pool confirmed - status unconfirmed.",
+    unusableNote: "effectively unusable at this size",
+    venues: [
+      {
+        name: "Raydium",
+        url: "https://raydium.io/swap/?inputMint=2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      },
+    ],
   },
 ];
 
@@ -152,20 +204,6 @@ const statusBorderColor: Record<Venue["status"], string> = {
   none: "border-brand",
 };
 
-function StatusDot({ status }: { status: Venue["status"] }) {
-  return (
-    <span className="flex items-center gap-2">
-      <span
-        className={`h-2 w-2 shrink-0 rounded-full ${statusColor[status]}`}
-        aria-hidden="true"
-      />
-      <span className={`font-mono text-[13px] ${statusText[status]}`}>
-        {status}
-      </span>
-    </span>
-  );
-}
-
 function NativeStatusBadge({ status }: { status: Venue["status"] }) {
   return (
     <span
@@ -182,15 +220,13 @@ function NativeStatusBadge({ status }: { status: Venue["status"] }) {
   );
 }
 
-function Tag({ children }: { children: string }) {
-  return (
-    <span className="label-sm rounded-chip border border-hairline bg-nested px-1.5 py-0.5 text-[10px] text-muted-foreground">
-      {children}
-    </span>
-  );
-}
-
-function TradeButton({ href }: { href: string }) {
+function TradeButton({
+  href,
+  label = "Trade Now",
+}: {
+  href: string;
+  label?: string;
+}) {
   return (
     <a
       href={href}
@@ -204,7 +240,7 @@ function TradeButton({ href }: { href: string }) {
         fontWeight: 600,
       }}
     >
-      Trade Now
+      {label}
       <svg
         width="14"
         height="14"
@@ -224,48 +260,131 @@ function TradeButton({ href }: { href: string }) {
   );
 }
 
-function VenueRow({ venue }: { venue: Venue }) {
+const IMPACT_COLORS: Record<ChainGroup["severity"], string> = {
+  low: "#86EFAC",
+  medium: "#FCD34D",
+  high: "#F87171",
+};
+
+function ImpactBadge({
+  severity,
+  children,
+}: {
+  severity: ChainGroup["severity"];
+  children: string;
+}) {
+  const color = IMPACT_COLORS[severity];
   return (
-    <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-      <div className="flex flex-wrap items-center gap-2">
-        {venue.logo ? (
-          <img
-            src={venue.logo}
-            alt=""
-            className="shrink-0"
-            width={24}
-            height={24}
-            style={{
-              width: 24,
-              height: 24,
-              objectFit: "contain",
-              objectPosition: "center",
-            }}
-          />
-        ) : null}
-        {venue.chain ? (
-          <span className="label-sm text-[11px] text-muted-foreground">
-            {venue.chain}
-          </span>
-        ) : null}
-        <span className="font-semibold text-foreground">{venue.name}</span>
-        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
-      </div>
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+    <span
+      className="inline-flex items-center gap-1.5 rounded border px-2.5 py-1 font-mono text-[11px]"
+      style={{ backgroundColor: "#1e2a31", borderColor: color, color }}
+    >
+      {severity === "high" ? (
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+        </svg>
+      ) : null}
+      {children}
+    </span>
+  );
+}
+
+function TradeLink({ href }: { href: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent underline-offset-4 hover:underline"
+    >
+      Trade Now
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    </a>
+  );
+}
+
+function ChainGroupRow({ group }: { group: ChainGroup }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <li className="border-b border-hairline py-3 last:border-b-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
+      >
+        <span className="font-semibold text-foreground">{group.chain}</span>
         <span className="font-mono text-[13px] text-secondary-foreground">
-          {venue.pair}
+          {group.pair}
         </span>
-        <StatusDot status={venue.status} />
-        {venue.url ? (
-          <TradeButton href={venue.url} />
-        ) : (
-          <span className="text-[15px] text-muted-foreground">No link</span>
-        )}
-      </div>
-      {venue.flag ? (
-        <p className="text-[14px] text-warning">
-          {venue.flag}
-        </p>
+        <ImpactBadge severity={group.severity}>{group.impact}</ImpactBadge>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className={`ml-auto shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      {group.note ? (
+        <p className="mt-1.5 text-[14px] text-warning">{group.note}</p>
+      ) : null}
+      {open ? (
+        <div className="mt-2 rounded-chip border border-hairline bg-nested p-3">
+          <p className="font-mono text-[12px] break-all text-muted-foreground">
+            <span className="text-secondary-foreground">Contract:</span>{" "}
+            {group.contract}
+          </p>
+          <ul className="mt-1 flex flex-col">
+            {group.venues.map((v) => (
+              <li
+                key={v.name}
+                className="flex items-center justify-between gap-3 border-b border-hairline py-2.5 last:border-b-0"
+              >
+                <span className="text-[15px] text-foreground">{v.name}</span>
+                <TradeLink href={v.url} />
+              </li>
+            ))}
+          </ul>
+          {group.unusableNote ? (
+            <p className="pt-2 text-[14px]" style={{ color: "#F87171" }}>
+              {group.unusableNote}
+            </p>
+          ) : null}
+        </div>
       ) : null}
     </li>
   );
@@ -445,7 +564,7 @@ function Card({
 }: {
   accent?: string;
   title: string;
-  caption: string;
+  caption?: string;
   captionTone?: "muted" | "warning";
   nested?: boolean;
   children: ReactNode;
@@ -461,11 +580,13 @@ function Card({
         <div className="min-w-0 flex-1 p-5 sm:p-6">
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
-            <p
-              className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
-            >
-              {caption}
-            </p>
+            {caption ? (
+              <p
+                className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
+              >
+                {caption}
+              </p>
+            ) : null}
           </header>
           {children}
         </div>
@@ -477,7 +598,6 @@ function Card({
 function Page() {
   const { prices, connected } = useRbntPrices();
   const native = VENUES.filter((v) => v.category === "native-spot");
-  const wrapped = VENUES.filter((v) => v.category === "wrapped-spot");
   const futures = VENUES.filter((v) => v.category === "futures");
 
   return (
@@ -546,26 +666,89 @@ function Page() {
           captionTone="warning"
         >
           <ul className="flex flex-col">
-            {wrapped.map((v) => (
-              <VenueRow key={v.chain} venue={v} />
+            {CHAIN_GROUPS.map((g) => (
+              <ChainGroupRow key={g.chain} group={g} />
             ))}
           </ul>
-          <div className="mt-4 rounded-chip border border-hairline bg-nested p-3">
-            {CONTRACTS.map((c) => (
-              <p
-                key={c.label}
-                className="font-mono text-[12px] break-all text-muted-foreground"
-              >
-                <span className="text-secondary-foreground">{c.label}</span>{" "}
-                {c.address}
-              </p>
-            ))}
-          </div>
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
             wRBNT is a separate ERC-20 token pegged 1:1 to native RBNT through
             Redbelly's official Ethereum bridge. It is not interchangeable on
             every venue without bridging.
           </p>
+        </Card>
+
+        <Card
+          title="Spot - Redbelly Native DEX"
+          caption="Trade directly on Redbelly Network"
+        >
+          <ul className="flex flex-col">
+            <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold text-foreground">RBNT</span>
+                <span className="font-mono text-[13px] text-secondary-foreground">
+                  RBNT/USDC.e
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+                <NativeStatusBadge status="verified" />
+                <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=NATIVE&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
+              </div>
+            </li>
+            <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold text-foreground">WRBNT</span>
+                <span className="font-mono text-[13px] text-secondary-foreground">
+                  WRBNT/USDC.e
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+                <NativeStatusBadge status="verified" />
+                <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=0x6ed1F491e2d31536D6561f6bdB2AdC8F092a6076&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
+              </div>
+              <p className="w-full font-mono text-[12px] break-all text-muted-foreground">
+                0x6ed1F491e2d31536D6561f6bdB2AdC8F092a6076
+              </p>
+            </li>
+          </ul>
+          <p className="mt-4 text-[14px] text-muted-foreground">
+            reddex is the official liquidity hub for Redbelly Network.
+          </p>
+        </Card>
+
+        <Card title="Bridges">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
+              <h3 className="font-semibold text-foreground">
+                Lucid Labs Bridge
+              </h3>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
+                Official route for bringing RBNT and WRBNT back to Redbelly
+                Network from 9 chains: Ethereum, Arbitrum, Optimism, Base, BSC,
+                Polygon, Avalanche, Sonic, and Solana (Solana route currently
+                unavailable).
+              </p>
+              <div className="mt-4">
+                <TradeButton
+                  href="https://bridge.lucidlabs.fi/"
+                  label="Open Bridge"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
+              <h3 className="font-semibold text-foreground">reddex Bridge</h3>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
+                Official route for bridging USDC and USDT into Redbelly
+                Network. Runs on the same Lucid Labs / Polymer infrastructure.
+                Flat 1% fee.
+              </p>
+              <div className="mt-4">
+                <TradeButton
+                  href="https://www.reddex.io/bridge"
+                  label="Open Bridge"
+                />
+              </div>
+            </div>
+          </div>
         </Card>
 
         <Card
