@@ -295,7 +295,7 @@ function PriceCell({
   if (venue.name === "BYDFi") {
     return (
       <span
-        className="justify-self-end text-right"
+        className="justify-self-end whitespace-nowrap text-right"
         style={{ ...baseStyle, color: "#93a4ae" }}
       >
         Check exchange
@@ -306,7 +306,7 @@ function PriceCell({
   if (price == null) {
     return (
       <span
-        className="justify-self-end text-right"
+        className="justify-self-end whitespace-nowrap text-right"
         style={{ ...baseStyle, color: "#6b7a85" }}
       >
         {connected ? "loading" : "offline"}
@@ -317,7 +317,7 @@ function PriceCell({
 
   return (
     <span
-      className="justify-self-end text-right"
+      className="justify-self-end whitespace-nowrap text-right"
       style={{ ...baseStyle, color: connected ? "#e4ebf0" : "#6b7a85" }}
     >
       {isFiatQuote(venue.pair) ? "$" : ""}
@@ -336,14 +336,7 @@ function NativeVenueRow({
   connected: boolean;
 }) {
   return (
-    <li
-      className="grid items-center border-b border-hairline py-3 last:border-b-0"
-      style={{
-        gridTemplateColumns:
-          "minmax(120px, 1fr) 52px 110px 100px 130px minmax(90px, auto)",
-        columnGap: 12,
-      }}
-    >
+    <li className="grid grid-cols-subgrid col-span-full items-center border-b border-hairline py-3 last:border-b-0">
       <div className="flex items-center gap-2 whitespace-nowrap">
         {venue.logo ? (
           <img
@@ -466,7 +459,7 @@ function Page() {
   const futures = VENUES.filter((v) => v.category === "futures");
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-5 py-10 sm:px-8 sm:py-14">
+    <main className="mx-auto w-full max-w-4xl px-5 py-10 sm:px-8 sm:py-14">
       <div className="mb-4 flex items-center justify-between">
         <span className="text-[13px] font-bold tracking-[0.12em] text-foreground uppercase">
           Redbelly DAO
@@ -503,7 +496,7 @@ function Page() {
           caption="You own the token"
         >
           <div className="-mx-1 overflow-x-auto px-1">
-            <ul className="flex min-w-[680px] flex-col">
+            <ul className="grid w-full min-w-[820px] grid-cols-[minmax(160px,1fr)_60px_110px_100px_130px_170px] gap-x-3 gap-y-0">
               {native.map((v) => (
                 <Fragment key={v.name}>
                   <NativeVenueRow
@@ -511,11 +504,11 @@ function Page() {
                     price={prices[v.name.toLowerCase()]}
                     connected={connected}
                   />
-                  {v.name === "WhiteBIT" ? (
-                    <li className="list-none">
-                      <WhitebitCallout />
-                    </li>
-                  ) : null}
+              {v.name === "WhiteBIT" ? (
+                <li className="col-span-full list-none">
+                  <WhitebitCallout />
+                </li>
+              ) : null}
                 </Fragment>
               ))}
             </ul>
