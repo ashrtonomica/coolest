@@ -95,11 +95,83 @@ const VENUES: Venue[] = [
   },
 ];
 
-const CONTRACTS = [
-  { label: "Ethereum:", address: "0xb45ffb51984d626ee758b336c61cf20990c6bf13" },
+type ChainDexVenue = {
+  name: string;
+  url: string;
+};
+
+type ChainGroup = {
+  chain: string;
+  pair: string;
+  contract: string;
+  impact: string;
+  severity: "low" | "medium" | "high";
+  note?: string;
+  unusableNote?: string;
+  venues: ChainDexVenue[];
+};
+
+const CHAIN_GROUPS: ChainGroup[] = [
   {
-    label: "Solana:",
-    address: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
+    chain: "Ethereum",
+    pair: "WRBNT/ETH",
+    contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
+    impact: "100k: 1.51-2.87% | 1M: 13-14%",
+    severity: "medium",
+    venues: [
+      {
+        name: "1inch",
+        url: "https://1inch.com/swap?src=1:0xb45ffb51984d626ee758b336c61cf20990c6bf13&dst=1:USDT",
+      },
+      {
+        name: "OKX DEX",
+        url: "https://web3.okx.com/dex-swap?chain=ethereum,ethereum&token=0xb45ffb51984d626ee758b336c61cf20990c6bf13,0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      },
+      {
+        name: "Bitget",
+        url: "https://web3.bitget.com/en/swap/eth/0xb45fFB51984d626Ee758b336C61Cf20990c6bF13",
+      },
+    ],
+  },
+  {
+    chain: "Base",
+    pair: "RBNT/USDC",
+    contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
+    impact: "1M: 7.88-8.04% | 100k: 13.36%",
+    severity: "medium",
+    venues: [
+      {
+        name: "KyberSwap",
+        url: "https://kyberswap.com/swap/base/0x020940df9f5e77338a094d55b5b5914122a804a5-to-usdc",
+      },
+      {
+        name: "1inch",
+        url: "https://1inch.com/swap?src=8453:0x020940df9f5e77338a094d55b5b5914122a804a5&dst=8453:USDC",
+      },
+      {
+        name: "OKX DEX",
+        url: "https://web3.okx.com/dex-swap?chain=base,base&token=0x020940df9f5e77338a094d55b5b5914122a804a5,0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+      },
+      {
+        name: "Bitget",
+        url: "https://web3.bitget.com/en/swap/base/0x020940df9F5E77338a094D55b5B5914122a804A5",
+      },
+    ],
+  },
+  {
+    chain: "Solana",
+    pair: "WRBNT/-",
+    contract: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
+    impact: "10k: 86.77%",
+    severity: "high",
+    note: "No live pool confirmed - status unconfirmed.",
+    unusableNote: "effectively unusable at this size",
+    venues: [
+      {
+        name: "Raydium",
+        url: "https://raydium.io/swap/?inputMint=2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3&outputMint=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      },
+    ],
   },
 ];
 
