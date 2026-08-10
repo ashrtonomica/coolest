@@ -309,10 +309,11 @@ function PriceCell({
         className="justify-self-end text-right"
         style={{ ...baseStyle, color: "#6b7a85" }}
       >
-        {connected ? "-" : "-"}
+        {connected ? "loading" : "offline"}
       </span>
     );
   }
+
 
   return (
     <span
