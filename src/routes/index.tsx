@@ -270,11 +270,76 @@ function VenueRow({ venue }: { venue: Venue }) {
   );
 }
 
-function NativeVenueRow({ venue }: { venue: Venue }) {
+const MONO_STACK = '"JetBrains Mono", ui-monospace, SFMono-Regular, monospace';
+
+function isFiatQuote(pair: string) {
+  const quote = pair.split("/")[1]?.toUpperCase() ?? "";
+  return ["USDT", "USDC", "USD", "EUR", "BUSD", "DAI"].includes(quote);
+}
+
+function PriceCell({
+  venue,
+  price,
+  connected,
+}: {
+  venue: Venue;
+  price: string | null | undefined;
+  connected: boolean;
+}) {
+  const baseStyle = {
+    fontFamily: MONO_STACK,
+    fontSize: 14,
+  } as const;
+
+  if (venue.name === "BYDFi") {
+    return (
+      <span
+        className="justify-self-end text-right"
+        style={{ ...baseStyle, color: "#93a4ae" }}
+      >
+        Check exchange
+      </span>
+    );
+  }
+
+  if (price == null) {
+    return (
+      <span
+        className="justify-self-end text-right"
+        style={{ ...baseStyle, color: "#6b7a85" }}
+      >
+        {connected ? "-" : "-"}
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className="justify-self-end text-right"
+      style={{ ...baseStyle, color: connected ? "#e4ebf0" : "#6b7a85" }}
+    >
+      {isFiatQuote(venue.pair) ? "$" : ""}
+      {price}
+    </span>
+  );
+}
+
+function NativeVenueRow({
+  venue,
+  price,
+  connected,
+}: {
+  venue: Venue;
+  price?: string | null;
+  connected: boolean;
+}) {
   return (
     <li
       className="grid items-center border-b border-hairline py-3 last:border-b-0"
-      style={{ gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px", columnGap: 16 }}
+      style={{
+        gridTemplateColumns: "minmax(160px, 1fr) 130px 120px 140px 110px",
+        columnGap: 16,
+      }}
     >
       <div className="flex items-center gap-2 whitespace-nowrap">
         {venue.logo ? (
