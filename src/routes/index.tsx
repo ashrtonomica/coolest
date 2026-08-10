@@ -458,7 +458,7 @@ function Card({
         {accent ? (
           <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
         ) : null}
-        <div className="flex-1 p-5 sm:p-6">
+        <div className="min-w-0 flex-1 p-5 sm:p-6">
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
             <p
@@ -513,8 +513,8 @@ function Page() {
 
       <div className="mt-8 flex flex-col gap-6">
         <Card title="Spot - Native RBNT" caption="You own the token">
-          <div className="-mx-1 overflow-x-auto px-1">
-            <ul className="grid w-full min-w-[860px] grid-cols-[minmax(150px,1fr)_60px_110px_100px_130px_minmax(130px,auto)] gap-x-3 gap-y-0">
+          <div className="-mx-1 min-w-0 max-w-full overflow-x-auto px-1">
+            <ul className="grid w-full min-w-[740px] grid-cols-[minmax(130px,1fr)_56px_105px_98px_128px_minmax(120px,auto)] gap-x-3 gap-y-0">
               {native.map((v) => (
                 <Fragment key={v.name}>
                   <NativeVenueRow
