@@ -501,22 +501,25 @@ function Page() {
           title="Spot - Native RBNT"
           caption="You own the token"
         >
-          <ul className="flex flex-col">
-            {native.map((v) => (
-              <Fragment key={v.name}>
-                <NativeVenueRow
-                  venue={v}
-                  price={prices[v.name.toLowerCase()]}
-                  connected={connected}
-                />
-                {v.name === "WhiteBIT" ? (
-                  <li className="list-none">
-                    <WhitebitCallout />
-                  </li>
-                ) : null}
-              </Fragment>
-            ))}
-          </ul>
+          <div className="-mx-1 overflow-x-auto px-1">
+            <ul className="flex min-w-[680px] flex-col">
+              {native.map((v) => (
+                <Fragment key={v.name}>
+                  <NativeVenueRow
+                    venue={v}
+                    price={prices[v.name.toLowerCase()]}
+                    connected={connected}
+                  />
+                  {v.name === "WhiteBIT" ? (
+                    <li className="list-none">
+                      <WhitebitCallout />
+                    </li>
+                  ) : null}
+                </Fragment>
+              ))}
+            </ul>
+          </div>
+
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
             CoinGecko's tracked markets table does not surface BYDFi. It was
             confirmed directly from the exchange itself (BYDFi's sitemap)
