@@ -278,6 +278,29 @@ function isFiatQuote(pair: string) {
   return ["USDT", "USDC", "USD", "EUR", "BUSD", "DAI"].includes(quote);
 }
 
+function LiveLabel() {
+  return (
+    <span className="flex items-center justify-end gap-1.5">
+      <span
+        className="live-dot inline-block shrink-0 rounded-full"
+        style={{ width: 6, height: 6, backgroundColor: "#86EFAC" }}
+        aria-hidden="true"
+      />
+      <span
+        style={{
+          fontFamily: MONO_STACK,
+          fontSize: 10,
+          letterSpacing: "0.5px",
+          textTransform: "uppercase",
+          color: "#6b7a85",
+        }}
+      >
+        Live
+      </span>
+    </span>
+  );
+}
+
 function PriceCell({
   venue,
   price,
@@ -295,7 +318,7 @@ function PriceCell({
   if (venue.name === "BYDFi") {
     return (
       <span
-        className="justify-self-end whitespace-nowrap text-right"
+        className="justify-self-end overflow-visible whitespace-nowrap text-right"
         style={{ ...baseStyle, color: "#93a4ae" }}
       >
         Check exchange
@@ -303,26 +326,23 @@ function PriceCell({
     );
   }
 
-  if (price == null) {
-    return (
-      <span
-        className="justify-self-end whitespace-nowrap text-right"
-        style={{ ...baseStyle, color: "#6b7a85" }}
-      >
-        {connected ? "loading" : "offline"}
-      </span>
-    );
-  }
-
-
   return (
-    <span
-      className="justify-self-end whitespace-nowrap text-right"
-      style={{ ...baseStyle, color: connected ? "#e4ebf0" : "#6b7a85" }}
-    >
-      {isFiatQuote(venue.pair) ? "$" : ""}
-      {price}
-    </span>
+    <div className="flex min-w-[110px] flex-col items-end justify-self-end overflow-visible text-right">
+      <LiveLabel />
+      <span
+        className="whitespace-nowrap"
+        style={{
+          ...baseStyle,
+          color: price == null || !connected ? "#6b7a85" : "#e4ebf0",
+        }}
+      >
+        {price == null
+          ? connected
+            ? "loading"
+            : "offline"
+          : `${isFiatQuote(venue.pair) ? "$" : ""}${price}`}
+      </span>
+    </div>
   );
 }
 
@@ -423,7 +443,7 @@ function Card({
   nested = false,
   children,
 }: {
-  accent: string;
+  accent?: string;
   title: string;
   caption: string;
   captionTone?: "muted" | "warning";
@@ -435,7 +455,9 @@ function Card({
       className={`rounded-panel border border-hairline ${nested ? "bg-nested" : "bg-card"} overflow-hidden`}
     >
       <div className="flex">
-        <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
+        {accent ? (
+          <div className="w-1 shrink-0" style={{ backgroundColor: accent }} />
+        ) : null}
         <div className="flex-1 p-5 sm:p-6">
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
@@ -490,13 +512,9 @@ function Page() {
       </header>
 
       <div className="mt-8 flex flex-col gap-6">
-        <Card
-          accent="#86EFAC"
-          title="Spot - Native RBNT"
-          caption="You own the token"
-        >
+        <Card title="Spot - Native RBNT" caption="You own the token">
           <div className="-mx-1 overflow-x-auto px-1">
-            <ul className="grid w-full min-w-[820px] grid-cols-[minmax(160px,1fr)_60px_110px_100px_130px_170px] gap-x-3 gap-y-0">
+            <ul className="grid w-full min-w-[860px] grid-cols-[minmax(150px,1fr)_60px_110px_100px_130px_minmax(130px,auto)] gap-x-3 gap-y-0">
               {native.map((v) => (
                 <Fragment key={v.name}>
                   <NativeVenueRow
