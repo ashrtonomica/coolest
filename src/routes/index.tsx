@@ -443,7 +443,7 @@ function Card({
   nested = false,
   children,
 }: {
-  accent: string;
+  accent?: string;
   title: string;
   caption: string;
   captionTone?: "muted" | "warning";
