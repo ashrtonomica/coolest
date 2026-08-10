@@ -666,26 +666,89 @@ function Page() {
           captionTone="warning"
         >
           <ul className="flex flex-col">
-            {wrapped.map((v) => (
-              <VenueRow key={v.chain} venue={v} />
+            {CHAIN_GROUPS.map((g) => (
+              <ChainGroupRow key={g.chain} group={g} />
             ))}
           </ul>
-          <div className="mt-4 rounded-chip border border-hairline bg-nested p-3">
-            {CONTRACTS.map((c) => (
-              <p
-                key={c.label}
-                className="font-mono text-[12px] break-all text-muted-foreground"
-              >
-                <span className="text-secondary-foreground">{c.label}</span>{" "}
-                {c.address}
-              </p>
-            ))}
-          </div>
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
             wRBNT is a separate ERC-20 token pegged 1:1 to native RBNT through
             Redbelly's official Ethereum bridge. It is not interchangeable on
             every venue without bridging.
           </p>
+        </Card>
+
+        <Card
+          title="Spot - Redbelly Native DEX"
+          caption="Trade directly on Redbelly Network"
+        >
+          <ul className="flex flex-col">
+            <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold text-foreground">RBNT</span>
+                <span className="font-mono text-[13px] text-secondary-foreground">
+                  RBNT/USDC.e
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+                <NativeStatusBadge status="verified" />
+                <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=NATIVE&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
+              </div>
+            </li>
+            <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-semibold text-foreground">WRBNT</span>
+                <span className="font-mono text-[13px] text-secondary-foreground">
+                  WRBNT/USDC.e
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
+                <NativeStatusBadge status="verified" />
+                <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=0x6ed1F491e2d31536D6561f6bdB2AdC8F092a6076&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
+              </div>
+              <p className="w-full font-mono text-[12px] break-all text-muted-foreground">
+                0x6ed1F491e2d31536D6561f6bdB2AdC8F092a6076
+              </p>
+            </li>
+          </ul>
+          <p className="mt-4 text-[14px] text-muted-foreground">
+            reddex is the official liquidity hub for Redbelly Network.
+          </p>
+        </Card>
+
+        <Card title="Bridges">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
+              <h3 className="font-semibold text-foreground">
+                Lucid Labs Bridge
+              </h3>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
+                Official route for bringing RBNT and WRBNT back to Redbelly
+                Network from 9 chains: Ethereum, Arbitrum, Optimism, Base, BSC,
+                Polygon, Avalanche, Sonic, and Solana (Solana route currently
+                unavailable).
+              </p>
+              <div className="mt-4">
+                <TradeButton
+                  href="https://bridge.lucidlabs.fi/"
+                  label="Open Bridge"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
+              <h3 className="font-semibold text-foreground">reddex Bridge</h3>
+              <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
+                Official route for bridging USDC and USDT into Redbelly
+                Network. Runs on the same Lucid Labs / Polymer infrastructure.
+                Flat 1% fee.
+              </p>
+              <div className="mt-4">
+                <TradeButton
+                  href="https://www.reddex.io/bridge"
+                  label="Open Bridge"
+                />
+              </div>
+            </div>
+          </div>
         </Card>
 
         <Card
