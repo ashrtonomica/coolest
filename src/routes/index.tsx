@@ -171,6 +171,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
       {
         name: "OKX DEX",
         url: "https://web3.okx.com/dex-swap?chain=base,base&token=0x020940df9f5e77338a094d55b5b5914122a804a5,0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+        logo: okxLogo,
       },
       {
         name: "Bitget",
