@@ -729,6 +729,14 @@ function Page() {
           <ul className="flex flex-col">
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-wrap items-center gap-2">
+                <img
+                  src={rbntLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0 rounded-full"
+                  style={{ width: 20, height: 20, objectFit: "contain" }}
+                />
                 <span className="font-semibold text-foreground">RBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   RBNT/USDC.e
