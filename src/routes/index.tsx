@@ -359,6 +359,16 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         aria-expanded={open}
         className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
       >
+        {group.logo ? (
+          <img
+            src={group.logo}
+            alt=""
+            width={20}
+            height={20}
+            className="shrink-0 rounded-full"
+            style={{ width: 20, height: 20, objectFit: "contain" }}
+          />
+        ) : null}
         <span className="font-semibold text-foreground">{group.chain}</span>
         <span className="font-mono text-[13px] text-secondary-foreground">
           {group.pair}
@@ -394,7 +404,19 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                 key={v.name}
                 className="flex items-center justify-between gap-3 border-b border-hairline py-2.5 last:border-b-0"
               >
-                <span className="text-[15px] text-foreground">{v.name}</span>
+                <span className="flex items-center gap-2 text-[15px] text-foreground">
+                  {v.logo ? (
+                    <img
+                      src={v.logo}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className="shrink-0 rounded-full"
+                      style={{ width: 18, height: 18, objectFit: "contain" }}
+                    />
+                  ) : null}
+                  {v.name}
+                </span>
                 <TradeLink href={v.url} />
               </li>
             ))}
@@ -680,7 +702,6 @@ function Page() {
         </Card>
 
         <Card
-          accent="#86EFAC"
           title="Spot - Wrapped RBNT (wRBNT)"
           caption="Separate from native RBNT"
           captionTone="warning"
