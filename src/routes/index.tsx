@@ -363,7 +363,9 @@ function NativeVenueRow({
           </span>
         ) : null}
         <span className="font-semibold text-foreground">{venue.name}</span>
-        <Tag>{venue.type === "NONE" ? "SPOT ONLY" : venue.type}</Tag>
+        <span className="rounded-chip border border-hairline bg-nested px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+          {venue.type === "NONE" ? "SPOT ONLY" : venue.type}
+        </span>
       </div>
       <span className="font-mono text-[13px] text-secondary-foreground">
         {venue.pair}
@@ -376,6 +378,7 @@ function NativeVenueRow({
           <span className="text-[15px] text-muted-foreground">No link</span>
         )}
       </div>
+      <PriceCell venue={venue} price={price} connected={connected} />
     </li>
   );
 }
