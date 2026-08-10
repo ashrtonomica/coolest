@@ -737,6 +737,14 @@ function Page() {
             </li>
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-wrap items-center gap-2">
+                <img
+                  src={wrbntLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0 rounded-full"
+                  style={{ width: 20, height: 20, objectFit: "contain" }}
+                />
                 <span className="font-semibold text-foreground">WRBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
@@ -752,6 +760,14 @@ function Page() {
             </li>
           </ul>
           <p className="mt-4 text-[14px] text-muted-foreground">
+            <img
+              src={reddexLogo}
+              alt=""
+              width={20}
+              height={20}
+              className="mr-2 inline-block align-[-4px] rounded-full"
+              style={{ width: 20, height: 20, objectFit: "contain" }}
+            />
             reddex is the official liquidity hub for Redbelly Network.
           </p>
         </Card>
