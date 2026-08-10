@@ -413,10 +413,10 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                     <img
                       src={v.logo}
                       alt=""
-                      width={18}
-                      height={18}
+                      width={20}
+                      height={20}
                       className="shrink-0 rounded-full"
-                      style={{ width: 18, height: 18, objectFit: "contain" }}
+                      style={{ width: 20, height: 20, objectFit: "contain" }}
                     />
                   ) : null}
                   {v.name}
