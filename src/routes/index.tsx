@@ -51,7 +51,7 @@ const VENUES: Venue[] = [
   {
     name: "MEXC",
     type: "CEX",
-    pair: "RBNT/USDT, RBNT/USDC",
+    pair: "RBNT/USDT",
     url: "https://www.mexc.com/exchange/RBNT_USDT",
     status: "verified",
     category: "native-spot",
@@ -65,14 +65,6 @@ const VENUES: Venue[] = [
     status: "verified",
     category: "native-spot",
     logo: "/logos/gate.png",
-  },
-  {
-    name: "BitMart",
-    type: "CEX",
-    pair: "RBNT/USDT",
-    url: "https://www.bitmart.com/trade/RBNT_USDT",
-    status: "verified",
-    category: "native-spot",
   },
   {
     name: "WhiteBIT",
@@ -382,9 +374,9 @@ function Page() {
             ))}
           </ul>
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
-            CoinGecko's tracked markets table does not surface BYDFi or BitMart.
-            Both were confirmed directly from the exchanges themselves (BYDFi's
-            sitemap, BitMart's live trade page) before inclusion.
+            CoinGecko's tracked markets table does not surface BYDFi. It was
+            confirmed directly from the exchange itself (BYDFi's sitemap)
+            before inclusion.
           </p>
         </Card>
 
