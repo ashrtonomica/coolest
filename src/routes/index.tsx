@@ -787,7 +787,7 @@ function Page() {
         <Card title="Bridges">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="font-semibold text-foreground">
+              <h3 className="text-[16px] font-semibold leading-tight text-foreground">
                 Lucid Labs Bridge
               </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
