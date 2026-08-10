@@ -303,7 +303,7 @@ function Card({
   caption: string;
   captionTone?: "muted" | "warning";
   nested?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section
@@ -371,14 +371,14 @@ function Page() {
         >
           <ul className="flex flex-col">
             {native.map((v) => (
-              <React.Fragment key={v.name}>
+              <Fragment key={v.name}>
                 <VenueRow venue={v} />
                 {v.name === "WhiteBIT" ? (
                   <li className="list-none">
                     <WhitebitCallout />
                   </li>
                 ) : null}
-              </React.Fragment>
+              </Fragment>
             ))}
           </ul>
           <p className="mt-4 text-[16px] leading-relaxed text-secondary-foreground">
