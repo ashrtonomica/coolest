@@ -564,7 +564,7 @@ function Card({
 }: {
   accent?: string;
   title: string;
-  caption: string;
+  caption?: string;
   captionTone?: "muted" | "warning";
   nested?: boolean;
   children: ReactNode;
@@ -580,11 +580,13 @@ function Card({
         <div className="min-w-0 flex-1 p-5 sm:p-6">
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
-            <p
-              className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
-            >
-              {caption}
-            </p>
+            {caption ? (
+              <p
+                className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
+              >
+                {caption}
+              </p>
+            ) : null}
           </header>
           {children}
         </div>
