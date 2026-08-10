@@ -3,11 +3,13 @@ import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
 import ethereumLogo from "../ethereum-eth-logo.png";
 import baseLogo from "../Base_square_blue.png";
-import solanaLogo from "../solanaLogo.png";
+import solanaLogo from "../solana-sol-logo.png";
 import inchLogo from "../1inch.png";
 import bitgetLogo from "../bitget.png";
 import kyberswapLogo from "../kyberswap.png";
 import raydiumLogo from "../raydium.png";
+import okxLogo from "../OKX_id7gsDJl-c_0.png";
+import rbntLogo from "../rbnt.png";
 import wrbntLogo from "../wrbnt.png";
 import reddexLogo from "../reddex.png";
 
