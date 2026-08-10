@@ -432,7 +432,7 @@ function Page() {
           <ul className="flex flex-col">
             {native.map((v) => (
               <Fragment key={v.name}>
-                <VenueRow venue={v} />
+                <NativeVenueRow venue={v} />
                 {v.name === "WhiteBIT" ? (
                   <li className="list-none">
                     <WhitebitCallout />
