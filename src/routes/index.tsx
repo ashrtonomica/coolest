@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { type ReactNode, Fragment } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
