@@ -102,7 +102,7 @@ function Row({
         borderTop: `1px solid ${C.hairline}`,
       }}
     >
-      <div style={{ paddingTop: 6 * scale }}>
+      <div style={{ paddingTop: 7 * scale, lineHeight: 0 }}>
         <Dot color={dot} />
       </div>
       <div style={{ flex: 1 }}>
@@ -228,7 +228,7 @@ function Derivatives({ scale = 1 }: { scale?: number }) {
     <Card fill={C.nested} pad={18 * scale}>
       <Label size={12 * scale}>Derivatives / Futures</Label>
       <div style={{ display: "flex", gap: 10 * scale, marginTop: 10 * scale }}>
-        <div style={{ paddingTop: 6 * scale }}>
+        <div style={{ paddingTop: 7 * scale, lineHeight: 0 }}>
           <Dot color={C.muted} />
         </div>
         <div>
@@ -416,7 +416,7 @@ function Frame1200() {
             Where to buy and trade RBNT
           </div>
           <Label size={11}>Spot</Label>
-          <div style={{ transform: "scale(0.78)", transformOrigin: "top left", width: "128.2%" }}>
+          <div style={{ transform: "scale(0.70)", transformOrigin: "top left", width: "142.8%" }}>
             <SpotBlocks scale={0.62} compact />
           </div>
 
