@@ -368,23 +368,33 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
+        className="flex w-full items-center gap-3 text-left"
       >
-        {group.logo ? (
-          <img
-            src={group.logo}
-            alt=""
-            width={20}
-            height={20}
-            className="shrink-0 rounded-full"
-            style={{ width: 20, height: 20, objectFit: "contain" }}
-          />
-        ) : null}
-        <span className="font-semibold text-foreground">{group.chain}</span>
-        <span className="font-mono text-[13px] text-secondary-foreground">
-          {group.pair}
+        <span className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
+          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            {group.logo ? (
+              <img
+                src={group.logo}
+                alt=""
+                width={20}
+                height={20}
+                className="shrink-0"
+                style={LOGO_STYLE}
+              />
+            ) : null}
+            <span className="font-semibold text-foreground">{group.chain}</span>
+            <span className="font-mono text-[13px] text-secondary-foreground">
+              {group.pair}
+            </span>
+          </span>
+          <span className="flex flex-col items-start gap-1">
+            {group.impacts.map((impact) => (
+              <ImpactBadge key={impact} severity={group.severity}>
+                {impact}
+              </ImpactBadge>
+            ))}
+          </span>
         </span>
-        <ImpactBadge severity={group.severity}>{group.impact}</ImpactBadge>
         <svg
           width="16"
           height="16"
@@ -395,7 +405,7 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className={`ml-auto shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
