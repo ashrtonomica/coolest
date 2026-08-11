@@ -10,7 +10,9 @@ import kyberswapLogo from "../kyber-network-crystal-v2-knc-logo.png";
 import raydiumLogo from "../raydium.png";
 import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
-import wrbntLogo from "../wrbntlogo.png";
+import wrbntLogo from "../wrbnt-mark.png";
+import daoLogo from "../dao-logo-on-dark.png";
+
 import reddexLogo from "../reddex.png";
 import lucidLogo from "../lucid.png";
 
