@@ -952,7 +952,7 @@ function Page() {
         </section>
       </div>
 
-      <footer className="mt-10 border-t border-hairline pt-6">
+      <footer className="mt-10 border-t border-hairline pt-6 pb-10">
         <p className="font-mono text-[13px]" style={{ color: "#ffb3ae" }}>
           Last verified: 2026-08-11 UTC
         </p>
