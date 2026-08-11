@@ -10,7 +10,9 @@ import kyberswapLogo from "../kyber-network-crystal-v2-knc-logo.png";
 import raydiumLogo from "../raydium.png";
 import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
-import wrbntLogo from "../wrbntlogo.png";
+import wrbntLogo from "../wrbnt-mark.png";
+import daoLogo from "../dao-logo-on-dark.png";
+
 import reddexLogo from "../reddex.png";
 import lucidLogo from "../lucid.png";
 
@@ -666,14 +668,18 @@ function Page() {
 
   return (
     <main className="mx-auto w-full max-w-4xl px-5 py-10 sm:px-8 sm:py-14">
-      <div className="mb-4 flex items-center justify-between">
-        <span className="text-[13px] font-bold tracking-[0.12em] text-foreground uppercase">
-          Redbelly DAO
-        </span>
+      <div className="mb-8 flex items-center justify-between gap-6 pt-2">
+        <img
+          src={daoLogo}
+          alt="Redbelly DAO"
+          className="block w-auto"
+          style={{ height: 28, objectFit: "contain" }}
+        />
         <span className="label-sm text-[11px] text-muted-foreground">
           TASK-20
         </span>
       </div>
+
 
       <header className="border-b border-hairline pb-8">
         <h1 className="text-[32px] leading-tight font-bold tracking-[-0.02em] text-foreground sm:text-[44px]">
@@ -774,17 +780,18 @@ function Page() {
                 <img
                   src={wrbntLogo}
                   alt=""
-                  width={56}
-                  height={56}
+                  width={25}
+                  height={24}
                   className="shrink-0"
                   style={{
-                    width: 56,
-                    height: 56,
-                    minWidth: 56,
-                    minHeight: 56,
+                    width: 25,
+                    height: 24,
+                    minWidth: 25,
+                    minHeight: 24,
                     objectFit: "contain",
                   }}
                 />
+
                 <span className="font-semibold text-foreground">WRBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
