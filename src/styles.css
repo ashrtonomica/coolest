@@ -80,3 +80,19 @@ body {
 @utility live-dot {
   animation: live-pulse 1.5s ease-in-out infinite;
 }
+
+.footer-doc-link {
+  color: #93a4ae;
+  text-decoration: none;
+}
+.footer-doc-link:hover {
+  color: #ffb3ae;
+  text-decoration: none;
+}
+.footer-logo-link {
+  opacity: 1;
+  transition: opacity 150ms ease;
+}
+.footer-logo-link:hover {
+  opacity: 0.8;
+}
