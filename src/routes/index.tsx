@@ -10,7 +10,7 @@ import kyberswapLogo from "../kyber-network-crystal-v2-knc-logo.png";
 import raydiumLogo from "../raydium.png";
 import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
-import wrbntLogo from "../wrbnt.png";
+import wrbntLogo from "../wrbntlogo.png";
 import reddexLogo from "../reddex.png";
 import lucidLogo from "../lucid.png";
 
@@ -415,7 +415,16 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
             ))}
           </ul>
           {group.unusableNote ? (
-            <p className="pt-2 text-[14px]" style={{ color: "#F87171" }}>
+            <p
+              className="mt-2 inline-block font-mono text-[13px]"
+              style={{
+                backgroundColor: "#1e2a31",
+                border: "1px solid #F87171",
+                borderRadius: "4px",
+                color: "#F87171",
+                padding: "4px 10px",
+              }}
+            >
               {group.unusableNote}
             </p>
           ) : null}
@@ -599,7 +608,7 @@ function Card({
 }: {
   accent?: string;
   title: string;
-  caption?: string;
+  caption?: string | ReactNode;
   captionTone?: "muted" | "warning";
   nested?: boolean;
   children: ReactNode;
@@ -616,11 +625,15 @@ function Card({
           <header className="mb-4">
             <h2 className="label-sm text-[13px] text-foreground">{title}</h2>
             {caption ? (
-              <p
-                className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
-              >
-                {caption}
-              </p>
+              typeof caption === "string" ? (
+                <p
+                  className={`mt-1 text-[15px] ${captionTone === "warning" ? "text-warning" : "text-muted-foreground"}`}
+                >
+                  {caption}
+                </p>
+              ) : (
+                <div className="mt-1">{caption}</div>
+              )
             ) : null}
           </header>
           {children}
@@ -784,11 +797,12 @@ function Page() {
                 <img
                   src={lucidLogo}
                   alt=""
+                  width={28}
+                  height={28}
                   className="shrink-0"
                   style={{
-                    height: 20,
-                    width: "auto",
-                    maxWidth: 80,
+                    width: 28,
+                    height: 28,
                     objectFit: "contain",
                   }}
                 />
@@ -812,11 +826,12 @@ function Page() {
                 <img
                   src={reddexLogo}
                   alt=""
+                  width={28}
+                  height={28}
                   className="shrink-0"
                   style={{
-                    height: 20,
-                    width: "auto",
-                    maxWidth: 80,
+                    width: 28,
+                    height: 28,
                     objectFit: "contain",
                   }}
                 />
@@ -838,10 +853,21 @@ function Page() {
         </Card>
 
         <Card
-          accent="#EF5350"
           title="Futures / Derivatives"
-          caption="No ownership. Leverage risk."
-          captionTone="warning"
+          caption={
+            <span
+              className="inline-block font-mono text-[13px]"
+              style={{
+                backgroundColor: "#1e2a31",
+                border: "1px solid #FCD34D",
+                borderRadius: "4px",
+                color: "#FCD34D",
+                padding: "4px 10px",
+              }}
+            >
+              No ownership. Leverage risk.
+            </span>
+          }
           nested
         >
           <p className="rounded-chip border border-hairline bg-card px-4 py-3 text-[18px] font-semibold text-foreground">
