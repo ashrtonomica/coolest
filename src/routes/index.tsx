@@ -749,54 +749,48 @@ function Page() {
         >
           <ul className="flex flex-col">
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-              <div className="flex flex-col items-start gap-1">
-                <span className="flex items-center gap-2">
-                  <span className="flex w-14 shrink-0 items-center">
-                    <img
-                      src={rbntLogo}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="shrink-0"
-                      style={LOGO_STYLE}
-                    />
-                  </span>
-                  <span className="font-semibold text-foreground">RBNT</span>
-                </span>
+              <div className="flex items-center gap-2">
+                <img
+                  src={rbntLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                  style={LOGO_STYLE}
+                />
+                <span className="font-semibold text-foreground">RBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   RBNT/USDC.e
                 </span>
               </div>
+
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
                 <NativeStatusBadge status="verified" />
                 <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=NATIVE&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
               </div>
             </li>
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-              <div className="flex flex-col items-start gap-1">
-                <span className="flex items-center gap-2">
-                  <span className="flex w-14 shrink-0 items-center">
-                    <img
-                      src={wrbntLogo}
-                      alt=""
-                      width={56}
-                      height={56}
-                      className="shrink-0"
-                      style={{
-                        width: 56,
-                        height: 56,
-                        minWidth: 56,
-                        minHeight: 56,
-                        objectFit: "contain",
-                      }}
-                    />
-                  </span>
-                  <span className="font-semibold text-foreground">WRBNT</span>
-                </span>
+              <div className="flex items-center gap-2">
+                <img
+                  src={wrbntLogo}
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="shrink-0"
+                  style={{
+                    width: 56,
+                    height: 56,
+                    minWidth: 56,
+                    minHeight: 56,
+                    objectFit: "contain",
+                  }}
+                />
+                <span className="font-semibold text-foreground">WRBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
                 </span>
               </div>
+
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-[480px]:justify-end">
                 <NativeStatusBadge status="verified" />
                 <TradeButton href="https://www.reddex.io/swap?chain=redbelly&inputCurrency=0x6ed1F491e2d31536D6561f6bdB2AdC8F092a6076&outputCurrency=0x8201c02d4AB2214471E8C3AD6475C8b0CD9F2D06" />
