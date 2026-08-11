@@ -6,7 +6,7 @@ import baseLogo from "../Base_square_blue.png";
 import solanaLogo from "../solana-sol-logo.png";
 import inchLogo from "../1inch.png";
 import bitgetLogo from "../bitget.png";
-import kyberswapLogo from "../kyberswap.png";
+import kyberswapLogo from "../kyber-network-crystal-v2-knc-logo.png";
 import raydiumLogo from "../raydium.png";
 import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
