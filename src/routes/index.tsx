@@ -806,10 +806,8 @@ function Page() {
             <img
               src={reddexLogo}
               alt=""
-              width={20}
-              height={20}
               className="mr-2 inline-block align-[-4px]"
-              style={LOGO_STYLE}
+              style={WORDMARK_SM_STYLE}
             />
             Reddex is the official liquidity hub for Redbelly Network.
           </p>
@@ -822,14 +820,8 @@ function Page() {
                 <img
                   src={lucidLogo}
                   alt=""
-                  width={28}
-                  height={28}
                   className="shrink-0"
-                  style={{
-                    width: 28,
-                    height: 28,
-                    objectFit: "contain",
-                  }}
+                  style={WORDMARK_STYLE}
                 />
                 Lucid Labs Bridge
               </h3>
@@ -851,14 +843,8 @@ function Page() {
                 <img
                   src={reddexLogo}
                   alt=""
-                  width={28}
-                  height={28}
                   className="shrink-0"
-                  style={{
-                    width: 28,
-                    height: 28,
-                    objectFit: "contain",
-                  }}
+                  style={WORDMARK_STYLE}
                 />
                 Reddex Bridge
               </h3>
