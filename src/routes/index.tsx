@@ -683,10 +683,11 @@ function Page() {
           Canonical venue list: native, wrapped, and derivatives
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-4">
-          <span className="font-mono text-[13px] text-accent">
-            <span style={{ color: "#ffb3ae" }}>
-              Last verified: 2026-08-08 UTC
-            </span>
+          <span
+            className="font-mono text-[13px]"
+            style={{ color: "#ffb3ae" }}
+          >
+            Last verified: 2026-08-08 UTC
           </span>
           <a
             href="#verify"
