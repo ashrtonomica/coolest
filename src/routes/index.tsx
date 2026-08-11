@@ -6,7 +6,7 @@ import baseLogo from "../Base_square_blue.png";
 import solanaLogo from "../solana-sol-logo.png";
 import inchLogo from "../1inch.png";
 import bitgetLogo from "../bitget.png";
-import kyberswapLogo from "../kyberswap.png";
+import kyberswapLogo from "../kyber-network-crystal-v2-knc-logo.png";
 import raydiumLogo from "../raydium.png";
 import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
@@ -302,7 +302,7 @@ function ImpactBadge({
   children,
 }: {
   severity: ChainGroup["severity"];
-  children: string;
+  children: ReactNode;
 }) {
   const color = IMPACT_COLORS[severity];
   return (
@@ -358,12 +358,14 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
             {group.pair}
           </span>
         </span>
-        <span className="flex shrink-0 flex-col items-end gap-1">
-          {group.impacts.map((impact) => (
-            <ImpactBadge key={impact} severity={group.severity}>
-              {impact}
-            </ImpactBadge>
-          ))}
+        <span className="flex shrink-0 items-center">
+          <ImpactBadge severity={group.severity}>
+            <span className="flex flex-col items-start leading-tight">
+              {group.impacts.map((impact) => (
+                <span key={impact}>{impact}</span>
+              ))}
+            </span>
+          </ImpactBadge>
         </span>
         <svg
           width="16"
