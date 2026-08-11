@@ -757,14 +757,14 @@ function Page() {
                   <img
                     src={wrbntLogo}
                     alt=""
-                    width={28}
-                    height={28}
+                    width={56}
+                    height={56}
                     className="shrink-0"
                     style={{
-                      width: 28,
-                      height: 28,
-                      minWidth: 28,
-                      minHeight: 28,
+                      width: 56,
+                      height: 56,
+                      minWidth: 56,
+                      minHeight: 56,
                       objectFit: "contain",
                     }}
                   />
