@@ -1,10 +1,7 @@
 # REDBELLY DAO TASK-20: Where to Buy & Trade RBNT
 <img width="1434" height="1024" alt="dao-logo-on-dark" src="https://github.com/user-attachments/assets/b0326eba-68b4-4367-a579-cc59552e7b4e" />
 
-Canonical, dated reference for every live venue trading RBNT. Native RBNT and
-wrapped RBNT (wRBNT) are kept clearly separate, and the document states plainly
-that no futures market is currently confirmed, instead of leaving that gap for
-someone to assume one exists.
+
 
 ## Files
 
