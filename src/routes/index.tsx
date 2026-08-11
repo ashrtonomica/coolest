@@ -370,30 +370,28 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         aria-expanded={open}
         className="flex w-full items-center gap-3 text-left"
       >
-        <span className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
-          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            {group.logo ? (
-              <img
-                src={group.logo}
-                alt=""
-                width={20}
-                height={20}
-                className="shrink-0"
-                style={LOGO_STYLE}
-              />
-            ) : null}
-            <span className="font-semibold text-foreground">{group.chain}</span>
-            <span className="font-mono text-[13px] text-secondary-foreground">
-              {group.pair}
-            </span>
+        <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+          {group.logo ? (
+            <img
+              src={group.logo}
+              alt=""
+              width={20}
+              height={20}
+              className="shrink-0"
+              style={LOGO_STYLE}
+            />
+          ) : null}
+          <span className="font-semibold text-foreground">{group.chain}</span>
+          <span className="font-mono text-[13px] text-secondary-foreground">
+            {group.pair}
           </span>
-          <span className="flex flex-col items-start gap-1">
-            {group.impacts.map((impact) => (
-              <ImpactBadge key={impact} severity={group.severity}>
-                {impact}
-              </ImpactBadge>
-            ))}
-          </span>
+        </span>
+        <span className="flex shrink-0 flex-col items-end gap-1">
+          {group.impacts.map((impact) => (
+            <ImpactBadge key={impact} severity={group.severity}>
+              {impact}
+            </ImpactBadge>
+          ))}
         </span>
         <svg
           width="16"
