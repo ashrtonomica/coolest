@@ -358,12 +358,14 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
             {group.pair}
           </span>
         </span>
-        <span className="flex shrink-0 flex-col items-end gap-1">
-          {group.impacts.map((impact) => (
-            <ImpactBadge key={impact} severity={group.severity}>
-              {impact}
-            </ImpactBadge>
-          ))}
+        <span className="flex shrink-0 items-center">
+          <ImpactBadge severity={group.severity}>
+            <span className="flex flex-col items-start leading-tight">
+              {group.impacts.map((impact) => (
+                <span key={impact}>{impact}</span>
+              ))}
+            </span>
+          </ImpactBadge>
         </span>
         <svg
           width="16"
