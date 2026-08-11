@@ -373,9 +373,9 @@ function Frame1080() {
 
       <div style={{ marginTop: 14, flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
         <Label size={12}>Spot</Label>
-        <SpotBlocks scale={0.85} />
+        <SpotBlocks scale={0.78} />
         <Divider />
-        <Derivatives scale={0.85} />
+        <Derivatives scale={0.78} />
       </div>
 
       <div style={{ marginTop: 14 }}>
