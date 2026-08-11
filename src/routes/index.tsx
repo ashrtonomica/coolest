@@ -432,8 +432,8 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                       alt=""
                       width={20}
                       height={20}
-                      className="shrink-0 rounded-full"
-                      style={{ width: 20, height: 20, objectFit: "contain" }}
+                      className="shrink-0"
+                      style={LOGO_STYLE}
                     />
                   ) : null}
                   {v.name}
