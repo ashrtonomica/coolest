@@ -808,7 +808,15 @@ function Page() {
         <Card title="Bridges">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="text-[16px] font-semibold leading-tight text-foreground">
+              <h3 className="flex items-center gap-2 text-[16px] font-semibold leading-tight text-foreground">
+                <img
+                  src={lucidLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                  style={LOGO_STYLE}
+                />
                 Lucid Labs Bridge
               </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
@@ -825,7 +833,17 @@ function Page() {
               </div>
             </div>
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="text-[16px] font-semibold leading-tight text-foreground">reddex Bridge</h3>
+              <h3 className="flex items-center gap-2 text-[16px] font-semibold leading-tight text-foreground">
+                <img
+                  src={reddexLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                  style={LOGO_STYLE}
+                />
+                Reddex Bridge
+              </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
                 Official route for bridging USDC and USDT into Redbelly
                 Network. Runs on the same Lucid Labs / Polymer infrastructure.
