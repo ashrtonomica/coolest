@@ -963,15 +963,52 @@ function Page() {
         <p className="mt-2 text-[15px] text-muted-foreground">
           Not financial advice. Listings change, re-verify before trading.
         </p>
-        <a
-          href="https://redbelly-dao-taskboard.vercel.app/"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="mt-3 inline-block text-[14px] underline underline-offset-4 hover:no-underline"
-          style={{ color: "#ffb3ae" }}
-        >
-          Back to the Redbelly DAO Task Board
-        </a>
+        <div className="mt-6 flex items-center justify-center" style={{ gap: "32px" }}>
+          <a
+            href="https://cdn.jsdelivr.net/gh/fo8ball-dot/hello-there@main/public/Where_to_Buy_and_Trade_RBNT.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-doc-link inline-flex items-center no-underline"
+            style={{ gap: "6px", fontFamily: "JetBrains Mono, monospace", fontSize: "13px", letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+              <path d="M15 2v5h5" />
+              <text x="12" y="17" fontFamily="JetBrains Mono, monospace" fontSize="6" textAnchor="middle" fill="currentColor" stroke="none">PDF</text>
+            </svg>
+            <span>PDF</span>
+          </a>
+          <a
+            href="https://cdn.jsdelivr.net/gh/fo8ball-dot/hello-there@main/public/Where_to_Buy_and_Trade_RBNT.docx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-doc-link inline-flex items-center no-underline"
+            style={{ gap: "6px", fontFamily: "JetBrains Mono, monospace", fontSize: "13px", letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+              <path d="M15 2v5h5" />
+              <line x1="8" y1="13" x2="16" y2="13" />
+              <line x1="8" y1="17" x2="13" y2="17" />
+            </svg>
+            <span>DOCX</span>
+          </a>
+        </div>
+        <div className="flex justify-center" style={{ marginTop: "24px" }}>
+          <a
+            href="https://redbelly-dao-taskboard.vercel.app/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-logo-link"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/fo8ball-dot/hello-there@main/src/dao-logo-on-dark.png"
+              alt="Redbelly DAO"
+              style={{ height: "36px", width: "auto" }}
+            />
+          </a>
+        </div>
+
       </footer>
     </main>
   );
