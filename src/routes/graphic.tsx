@@ -349,39 +349,39 @@ function Frame1080() {
         width: 1080,
         height: 1080,
         background: C.bg,
-        padding: 48,
+        padding: 40,
         display: "flex",
         flexDirection: "column",
         boxSizing: "border-box",
       }}
     >
-      <Header scale={1.2} />
-      <div style={{ marginTop: 22 }}>
+      <Header scale={1.1} />
+      <div style={{ marginTop: 16 }}>
         <div
           style={{
             fontFamily: SANS,
             fontWeight: 700,
-            fontSize: 40,
+            fontSize: 34,
             letterSpacing: "-0.02em",
             color: C.text,
           }}
         >
           Where to buy and trade RBNT
         </div>
-        <div style={{ height: 4, width: 96, background: C.brand, marginTop: 12, borderRadius: 4 }} />
+        <div style={{ height: 4, width: 88, background: C.brand, marginTop: 10, borderRadius: 4 }} />
       </div>
 
-      <div style={{ marginTop: 20, flex: 1, display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ marginTop: 14, flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
         <Label size={12}>Spot</Label>
-        <SpotBlocks scale={1.05} />
+        <SpotBlocks scale={0.92} />
         <Divider />
-        <Derivatives scale={1.05} />
+        <Derivatives scale={0.9} />
       </div>
 
-      <div style={{ marginTop: 18 }}>
+      <div style={{ marginTop: 14 }}>
         <Divider />
-        <div style={{ marginTop: 12 }}>
-          <Stamp scale={1.1} />
+        <div style={{ marginTop: 10 }}>
+          <Stamp scale={1} />
         </div>
       </div>
     </div>
@@ -395,20 +395,20 @@ function Frame1200() {
         width: 1200,
         height: 630,
         background: C.bg,
-        padding: 32,
+        padding: 28,
         display: "flex",
         flexDirection: "column",
         boxSizing: "border-box",
       }}
     >
-      <Header scale={0.9} />
-      <div style={{ display: "flex", gap: 24, marginTop: 16, flex: 1, minHeight: 0 }}>
-        <div style={{ flex: "1 1 auto", display: "flex", flexDirection: "column", gap: 10 }}>
+      <Header scale={0.8} />
+      <div style={{ display: "flex", gap: 20, marginTop: 12, flex: 1, minHeight: 0 }}>
+        <div style={{ flex: "1 1 auto", display: "flex", flexDirection: "column", gap: 8 }}>
           <div
             style={{
               fontFamily: SANS,
               fontWeight: 700,
-              fontSize: 26,
+              fontSize: 24,
               letterSpacing: "-0.02em",
               color: C.text,
             }}
@@ -416,22 +416,23 @@ function Frame1200() {
             Where to buy and trade RBNT
           </div>
           <Label size={11}>Spot</Label>
-          <SpotBlocks scale={0.78} />
+          <SpotBlocks scale={0.62} compact />
         </div>
         <div style={{ width: 1, background: C.hairline }} />
-        <div style={{ flex: "0 0 300px", display: "flex", flexDirection: "column" }}>
-          <Derivatives scale={0.85} />
+        <div style={{ flex: "0 0 290px", display: "flex", flexDirection: "column" }}>
+          <Derivatives scale={0.8} />
         </div>
       </div>
-      <div style={{ marginTop: 14 }}>
+      <div style={{ marginTop: 12 }}>
         <Divider />
-        <div style={{ marginTop: 10 }}>
-          <Stamp scale={0.9} />
+        <div style={{ marginTop: 8 }}>
+          <Stamp scale={0.85} />
         </div>
       </div>
     </div>
   );
 }
+
 
 function GraphicPage() {
   const sq = useRef<HTMLDivElement>(null);
