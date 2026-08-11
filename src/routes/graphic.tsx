@@ -261,10 +261,10 @@ function Derivatives({ scale = 1 }: { scale?: number }) {
   );
 }
 
-function SpotBlocks({ scale = 1 }: { scale?: number }) {
+function SpotBlocks({ scale = 1, compact = false }: { scale?: number; compact?: boolean }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 14 * scale }}>
-      <Card pad={18 * scale}>
+    <div style={{ display: "flex", flexDirection: "column", gap: (compact ? 10 : 14) * scale }}>
+      <Card pad={(compact ? 14 : 18) * scale}>
         <Label size={12 * scale}>Native RBNT - CEX</Label>
         <div style={{ marginTop: 6 * scale }}>
           <Row scale={scale} dot={C.ok} name="Gate" pairs="RBNT/USDT" />
@@ -281,12 +281,16 @@ function SpotBlocks({ scale = 1 }: { scale?: number }) {
             dot={C.warn}
             name="WhiteBIT"
             pairs="RBNT/USDT"
-            note="Thin. No trades seen in hours before verification."
+            note={
+              compact
+                ? "Thin. No trades seen for hours."
+                : "Thin. No trades seen in hours before verification."
+            }
           />
         </div>
       </Card>
 
-      <Card pad={18 * scale}>
+      <Card pad={(compact ? 14 : 18) * scale}>
         <Label size={12 * scale}>Native RBNT - On-chain</Label>
         <div style={{ marginTop: 6 * scale }}>
           <Row scale={scale} dot={C.ok} name="Reddex" pairs="RBNT/USDC.e" />
@@ -298,30 +302,31 @@ function SpotBlocks({ scale = 1 }: { scale?: number }) {
             fontSize: 13 * scale,
             lineHeight: 1.5,
             color: C.muted,
-            marginTop: 10 * scale,
+            marginTop: 8 * scale,
           }}
         >
-          Reddex is the only venue trading RBNT and wRBNT directly on Redbelly Network without
-          bridging.
+          {compact
+            ? "Only venue trading RBNT and wRBNT on Redbelly Network without bridging."
+            : "Reddex is the only venue trading RBNT and wRBNT directly on Redbelly Network without bridging."}
         </div>
       </Card>
 
-      <Card pad={18 * scale}>
+      <Card pad={(compact ? 14 : 18) * scale}>
         <WrappedTag scale={scale} />
-        <div style={{ marginTop: 10 * scale }}>
+        <div style={{ marginTop: 8 * scale }}>
           <Row
             scale={scale}
             dot={C.warn}
             name="Ethereum"
             pairs="1inch, OKX DEX, Bitget"
-            note="Thin."
+            note={compact ? undefined : "Thin."}
           />
           <Row
             scale={scale}
             dot={C.warn}
             name="Base"
             pairs="KyberSwap, 1inch, OKX DEX, Bitget"
-            note="Thin."
+            note={compact ? undefined : "Thin."}
           />
           <Row
             scale={scale}
@@ -335,6 +340,7 @@ function SpotBlocks({ scale = 1 }: { scale?: number }) {
     </div>
   );
 }
+
 
 function Frame1080() {
   return (
