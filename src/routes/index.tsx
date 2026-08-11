@@ -402,7 +402,7 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         <p className="mt-1.5 text-[14px] text-warning">{group.note}</p>
       ) : null}
       {open ? (
-        <div className="mt-2 rounded-chip border border-hairline bg-nested p-3">
+        <div className="mt-3 border-t border-hairline pt-3">
           <p className="font-mono text-[12px] break-all text-muted-foreground">
             <span className="text-secondary-foreground">Contract:</span>{" "}
             {group.contract}
@@ -684,7 +684,9 @@ function Page() {
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-4">
           <span className="font-mono text-[13px] text-accent">
-            Last verified: 2026-08-08 UTC
+            <span style={{ color: "#ffb3ae" }}>
+              Last verified: 2026-08-08 UTC
+            </span>
           </span>
           <a
             href="#verify"
