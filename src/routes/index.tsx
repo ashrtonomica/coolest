@@ -1005,6 +1005,21 @@ function Page() {
             </svg>
             <span>GITHUB</span>
           </a>
+          <a
+            href="https://dev.to/poundeater/where-to-buy-and-trade-rbnt-4jn5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-doc-link inline-flex items-center no-underline"
+            style={{ gap: "6px", fontFamily: "JetBrains Mono, monospace", fontSize: "13px", letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2" />
+              <path d="M6 9v6M6 9h1.5a1.5 1.5 0 0 1 0 3H6" />
+              <path d="M11 9v6l2-6v6" />
+              <path d="M18 9h-2v6h2M16 12h1.5" />
+            </svg>
+            <span>DEV.TO</span>
+          </a>
         </div>
         <div className="flex justify-center" style={{ marginTop: "24px" }}>
           <a
