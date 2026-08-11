@@ -332,34 +332,6 @@ function ImpactBadge({
   );
 }
 
-function TradeLink({ href }: { href: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer noopener"
-      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent underline-offset-4 hover:underline"
-    >
-      Trade Now
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-        <polyline points="15 3 21 3 21 9" />
-        <line x1="10" y1="14" x2="21" y2="3" />
-      </svg>
-    </a>
-  );
-}
-
 function ChainGroupRow({ group }: { group: ChainGroup }) {
   const [open, setOpen] = useState(false);
   return (
@@ -370,30 +342,28 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         aria-expanded={open}
         className="flex w-full items-center gap-3 text-left"
       >
-        <span className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
-          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            {group.logo ? (
-              <img
-                src={group.logo}
-                alt=""
-                width={20}
-                height={20}
-                className="shrink-0"
-                style={LOGO_STYLE}
-              />
-            ) : null}
-            <span className="font-semibold text-foreground">{group.chain}</span>
-            <span className="font-mono text-[13px] text-secondary-foreground">
-              {group.pair}
-            </span>
+        <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-3 gap-y-1">
+          {group.logo ? (
+            <img
+              src={group.logo}
+              alt=""
+              width={20}
+              height={20}
+              className="shrink-0"
+              style={LOGO_STYLE}
+            />
+          ) : null}
+          <span className="font-semibold text-foreground">{group.chain}</span>
+          <span className="font-mono text-[13px] text-secondary-foreground">
+            {group.pair}
           </span>
-          <span className="flex flex-col items-start gap-1">
-            {group.impacts.map((impact) => (
-              <ImpactBadge key={impact} severity={group.severity}>
-                {impact}
-              </ImpactBadge>
-            ))}
-          </span>
+        </span>
+        <span className="flex shrink-0 flex-col items-end gap-1">
+          {group.impacts.map((impact) => (
+            <ImpactBadge key={impact} severity={group.severity}>
+              {impact}
+            </ImpactBadge>
+          ))}
         </span>
         <svg
           width="16"
@@ -438,7 +408,7 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                   ) : null}
                   {v.name}
                 </span>
-                <TradeLink href={v.url} />
+                <TradeButton href={v.url} />
               </li>
             ))}
           </ul>
