@@ -22,6 +22,22 @@ const LOGO_STYLE = {
   objectFit: "contain",
 } as const;
 
+// Wide wordmark logos (Lucid, Reddex) are cropped to content and rendered
+// at fixed height with auto width so the real logo stays legible.
+const WORDMARK_STYLE = {
+  height: 28,
+  width: "auto",
+  maxWidth: 140,
+  objectFit: "contain",
+} as const;
+
+const WORDMARK_SM_STYLE = {
+  height: 20,
+  width: "auto",
+  maxWidth: 100,
+  objectFit: "contain",
+} as const;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
