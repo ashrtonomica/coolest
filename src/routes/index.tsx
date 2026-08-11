@@ -751,14 +751,16 @@ function Page() {
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-col items-start gap-1">
                 <span className="flex items-center gap-2">
-                  <img
-                    src={rbntLogo}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="shrink-0"
-                    style={LOGO_STYLE}
-                  />
+                  <span className="flex w-14 shrink-0 items-center">
+                    <img
+                      src={rbntLogo}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="shrink-0"
+                      style={LOGO_STYLE}
+                    />
+                  </span>
                   <span className="font-semibold text-foreground">RBNT</span>
                 </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
@@ -773,20 +775,22 @@ function Page() {
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-col items-start gap-1">
                 <span className="flex items-center gap-2">
-                  <img
-                    src={wrbntLogo}
-                    alt=""
-                    width={56}
-                    height={56}
-                    className="shrink-0"
-                    style={{
-                      width: 56,
-                      height: 56,
-                      minWidth: 56,
-                      minHeight: 56,
-                      objectFit: "contain",
-                    }}
-                  />
+                  <span className="flex w-14 shrink-0 items-center">
+                    <img
+                      src={wrbntLogo}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="shrink-0"
+                      style={{
+                        width: 56,
+                        height: 56,
+                        minWidth: 56,
+                        minHeight: 56,
+                        objectFit: "contain",
+                      }}
+                    />
+                  </span>
                   <span className="font-semibold text-foreground">WRBNT</span>
                 </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
