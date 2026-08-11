@@ -994,7 +994,7 @@ function Page() {
             <span>DOCX</span>
           </a>
           <a
-            href="https://github.com/poundeater/hello-friend/"
+            href="https://github.com/poundeater/task20"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-doc-link inline-flex items-center no-underline"
