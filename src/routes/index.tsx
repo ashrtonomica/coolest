@@ -963,9 +963,9 @@ function Page() {
         <p className="mt-2 text-[15px] text-muted-foreground">
           Not financial advice. Listings change, re-verify before trading.
         </p>
-        <div className="mt-6 flex items-center justify-center" style={{ gap: "32px" }}>
+        <div className="mt-6 flex flex-wrap items-center justify-center" style={{ gap: "32px" }}>
           <a
-            href="https://cdn.jsdelivr.net/gh/fo8ball-dot/hello-there@main/public/Where_to_Buy_and_Trade_RBNT.pdf"
+            href="https://cdn.jsdelivr.net/gh/poundeater/task20@main/public/Where_to_Buy_and_Trade_RBNT.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-doc-link inline-flex items-center no-underline"
