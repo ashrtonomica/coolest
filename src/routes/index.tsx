@@ -17,6 +17,8 @@ import lucidLogo from "../lucid.png";
 const LOGO_STYLE = {
   width: 20,
   height: 20,
+  minWidth: 20,
+  minHeight: 20,
   objectFit: "contain",
 } as const;
 
@@ -98,7 +100,7 @@ const VENUES: Venue[] = [
     name: "BYDFi",
     type: "CEX",
     pair: "RBNT/USDT",
-    url: "https://www.bydfi.com",
+    url: "https://www.bydfi.com/en/spot/RBNT_USDT",
     status: "verified",
     category: "native-spot",
     logo: "/logos/bydfi.png",
@@ -360,10 +362,8 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         </span>
         <span className="flex shrink-0 items-center">
           <ImpactBadge severity={group.severity}>
-            <span className="flex flex-col items-start leading-tight">
-              {group.impacts.map((impact) => (
-                <span key={impact}>{impact}</span>
-              ))}
+            <span className="whitespace-nowrap">
+              {group.impacts.join(" | ")}
             </span>
           </ImpactBadge>
         </span>
