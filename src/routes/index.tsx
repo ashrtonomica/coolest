@@ -757,10 +757,16 @@ function Page() {
                   <img
                     src={wrbntLogo}
                     alt=""
-                    width={20}
-                    height={20}
+                    width={28}
+                    height={28}
                     className="shrink-0"
-                    style={LOGO_STYLE}
+                    style={{
+                      width: 28,
+                      height: 28,
+                      minWidth: 28,
+                      minHeight: 28,
+                      objectFit: "contain",
+                    }}
                   />
                   <span className="font-semibold text-foreground">WRBNT</span>
                 </span>
