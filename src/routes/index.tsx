@@ -673,7 +673,7 @@ function Page() {
           src={daoLogo}
           alt="Redbelly DAO"
           className="block w-auto"
-          style={{ height: 28, objectFit: "contain" }}
+          style={{ height: 56, objectFit: "contain" }}
         />
         <span className="label-sm text-[11px] text-muted-foreground">
           TASK-20
@@ -693,7 +693,7 @@ function Page() {
             className="font-mono text-[13px]"
             style={{ color: "#ffb3ae" }}
           >
-            Last verified: 2026-08-08 UTC
+            Last verified: 2026-08-11 UTC
           </span>
           <a
             href="#verify"
@@ -759,10 +759,16 @@ function Page() {
                 <img
                   src={rbntLogo}
                   alt=""
-                  width={20}
-                  height={20}
+                  width={25}
+                  height={24}
                   className="shrink-0"
-                  style={LOGO_STYLE}
+                  style={{
+                    width: 25,
+                    height: 24,
+                    minWidth: 25,
+                    minHeight: 24,
+                    objectFit: "contain",
+                  }}
                 />
                 <span className="font-semibold text-foreground">RBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
@@ -948,7 +954,7 @@ function Page() {
 
       <footer className="mt-10 border-t border-hairline pt-6">
         <p className="font-mono text-[13px]" style={{ color: "#ffb3ae" }}>
-          Last verified: 2026-08-08 UTC
+          Last verified: 2026-08-11 UTC
         </p>
         <p className="mt-2 text-[15px] text-secondary-foreground">
           Sources: CoinGecko, CoinCodex, Coinlore, and each exchange's own live
