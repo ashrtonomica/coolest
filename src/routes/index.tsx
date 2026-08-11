@@ -12,6 +12,13 @@ import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
 import wrbntLogo from "../wrbnt.png";
 import reddexLogo from "../reddex.png";
+import lucidLogo from "../lucid.png";
+
+const LOGO_STYLE = {
+  width: 20,
+  height: 20,
+  objectFit: "contain",
+} as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -116,7 +123,7 @@ type ChainGroup = {
   chain: string;
   pair: string;
   contract: string;
-  impact: string;
+  impacts: string[];
   severity: "low" | "medium" | "high";
   note?: string;
   unusableNote?: string;
@@ -129,7 +136,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Ethereum",
     pair: "WRBNT/ETH",
     contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
-    impact: "100k: 1.51-2.87% | 1M: 13-14%",
+    impacts: ["100k: 1.51-2.87%", "1M: 13-14%"],
     severity: "medium",
     logo: ethereumLogo,
     venues: [
@@ -154,7 +161,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Base",
     pair: "RBNT/USDC",
     contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
-    impact: "1M: 7.88-8.04% | 100k: 13.36%",
+    impacts: ["1M: 7.88-8.04%", "100k: 13.36%"],
     severity: "medium",
     logo: baseLogo,
     venues: [
@@ -184,7 +191,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Solana",
     pair: "WRBNT/-",
     contract: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
-    impact: "10k: 86.77%",
+    impacts: ["10k: 86.77%"],
     severity: "high",
     note: "No live pool confirmed - status unconfirmed.",
     unusableNote: "effectively unusable at this size",
@@ -361,23 +368,33 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full flex-wrap items-center gap-x-3 gap-y-2 text-left"
+        className="flex w-full items-center gap-3 text-left"
       >
-        {group.logo ? (
-          <img
-            src={group.logo}
-            alt=""
-            width={20}
-            height={20}
-            className="shrink-0 rounded-full"
-            style={{ width: 20, height: 20, objectFit: "contain" }}
-          />
-        ) : null}
-        <span className="font-semibold text-foreground">{group.chain}</span>
-        <span className="font-mono text-[13px] text-secondary-foreground">
-          {group.pair}
+        <span className="flex min-w-0 flex-1 flex-col items-start gap-1.5">
+          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            {group.logo ? (
+              <img
+                src={group.logo}
+                alt=""
+                width={20}
+                height={20}
+                className="shrink-0"
+                style={LOGO_STYLE}
+              />
+            ) : null}
+            <span className="font-semibold text-foreground">{group.chain}</span>
+            <span className="font-mono text-[13px] text-secondary-foreground">
+              {group.pair}
+            </span>
+          </span>
+          <span className="flex flex-col items-start gap-1">
+            {group.impacts.map((impact) => (
+              <ImpactBadge key={impact} severity={group.severity}>
+                {impact}
+              </ImpactBadge>
+            ))}
+          </span>
         </span>
-        <ImpactBadge severity={group.severity}>{group.impact}</ImpactBadge>
         <svg
           width="16"
           height="16"
@@ -388,7 +405,7 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className={`ml-auto shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 text-muted-foreground transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -415,8 +432,8 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
                       alt=""
                       width={20}
                       height={20}
-                      className="shrink-0 rounded-full"
-                      style={{ width: 20, height: 20, objectFit: "contain" }}
+                      className="shrink-0"
+                      style={LOGO_STYLE}
                     />
                   ) : null}
                   {v.name}
@@ -706,7 +723,7 @@ function Page() {
         </Card>
 
         <Card
-          title="Spot - Wrapped RBNT (wRBNT)"
+          title="Spot - RBNT / WRBNT"
           caption="Separate from native RBNT"
           captionTone="warning"
         >
@@ -728,16 +745,18 @@ function Page() {
         >
           <ul className="flex flex-col">
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <img
-                  src={rbntLogo}
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="shrink-0 rounded-full"
-                  style={{ width: 20, height: 20, objectFit: "contain" }}
-                />
-                <span className="font-semibold text-foreground">RBNT</span>
+              <div className="flex flex-col items-start gap-1">
+                <span className="flex items-center gap-2">
+                  <img
+                    src={rbntLogo}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="shrink-0"
+                    style={LOGO_STYLE}
+                  />
+                  <span className="font-semibold text-foreground">RBNT</span>
+                </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   RBNT/USDC.e
                 </span>
@@ -748,16 +767,18 @@ function Page() {
               </div>
             </li>
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <img
-                  src={wrbntLogo}
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="shrink-0 rounded-full"
-                  style={{ width: 20, height: 20, objectFit: "contain" }}
-                />
-                <span className="font-semibold text-foreground">WRBNT</span>
+              <div className="flex flex-col items-start gap-1">
+                <span className="flex items-center gap-2">
+                  <img
+                    src={wrbntLogo}
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="shrink-0"
+                    style={LOGO_STYLE}
+                  />
+                  <span className="font-semibold text-foreground">WRBNT</span>
+                </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
                 </span>
@@ -777,17 +798,25 @@ function Page() {
               alt=""
               width={20}
               height={20}
-              className="mr-2 inline-block align-[-4px] rounded-full"
-              style={{ width: 20, height: 20, objectFit: "contain" }}
+              className="mr-2 inline-block align-[-4px]"
+              style={LOGO_STYLE}
             />
-            reddex is the official liquidity hub for Redbelly Network.
+            Reddex is the official liquidity hub for Redbelly Network.
           </p>
         </Card>
 
         <Card title="Bridges">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="text-[16px] font-semibold leading-tight text-foreground">
+              <h3 className="flex items-center gap-2 text-[16px] font-semibold leading-tight text-foreground">
+                <img
+                  src={lucidLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                  style={LOGO_STYLE}
+                />
                 Lucid Labs Bridge
               </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
@@ -804,7 +833,17 @@ function Page() {
               </div>
             </div>
             <div className="flex flex-col rounded-chip border border-hairline bg-nested p-4">
-              <h3 className="text-[16px] font-semibold leading-tight text-foreground">reddex Bridge</h3>
+              <h3 className="flex items-center gap-2 text-[16px] font-semibold leading-tight text-foreground">
+                <img
+                  src={reddexLogo}
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                  style={LOGO_STYLE}
+                />
+                Reddex Bridge
+              </h3>
               <p className="mt-2 flex-1 text-[15px] leading-relaxed text-secondary-foreground">
                 Official route for bridging USDC and USDT into Redbelly
                 Network. Runs on the same Lucid Labs / Polymer infrastructure.
