@@ -979,7 +979,7 @@ function Page() {
             <span>PDF</span>
           </a>
           <a
-            href="https://cdn.jsdelivr.net/gh/poundeater/task20@main/public/Where_to_Buy_and_Trade_RBNT.docx"
+            href="https://docs.google.com/gview?url=https://raw.githubusercontent.com/poundeater/task20/main/public/Where_to_Buy_and_Trade_RBNT.docx&embedded=true"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-doc-link inline-flex items-center no-underline"
