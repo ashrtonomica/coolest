@@ -416,7 +416,7 @@ function Frame1200() {
             Where to buy and trade RBNT
           </div>
           <Label size={11}>Spot</Label>
-          <SpotBlocks scale={0.58} compact />
+          <SpotBlocks scale={0.5} compact />
         </div>
         <div style={{ width: 1, background: C.hairline }} />
         <div style={{ flex: "0 0 290px", display: "flex", flexDirection: "column" }}>
