@@ -12,6 +12,13 @@ import okxLogo from "../OKX_id7gsDJl-c_0.png";
 import rbntLogo from "../rbnt.png";
 import wrbntLogo from "../wrbnt.png";
 import reddexLogo from "../reddex.png";
+import lucidLogo from "../lucid.png";
+
+const LOGO_STYLE = {
+  width: 20,
+  height: 20,
+  objectFit: "contain",
+} as const;
 
 export const Route = createFileRoute("/")({
   head: () => ({
