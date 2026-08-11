@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { type ReactNode, Fragment, useState } from "react";
 import { useRbntPrices } from "@/hooks/useRbntPrices";
 import ethereumLogo from "../ethereum-eth-logo.png";
@@ -675,9 +675,14 @@ function Page() {
           className="block w-auto"
           style={{ height: 56, objectFit: "contain" }}
         />
-        <span className="label-sm text-[11px] text-muted-foreground">
-          TASK-20
-        </span>
+        <div className="flex items-center gap-4">
+          <Link to="/graphic" className="label-sm footer-doc-link">
+            Download
+          </Link>
+          <span className="label-sm text-[11px] text-muted-foreground">
+            TASK-20
+          </span>
+        </div>
       </div>
 
 
