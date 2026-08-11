@@ -780,17 +780,18 @@ function Page() {
                 <img
                   src={wrbntLogo}
                   alt=""
-                  width={56}
-                  height={56}
+                  width={25}
+                  height={24}
                   className="shrink-0"
                   style={{
-                    width: 56,
-                    height: 56,
-                    minWidth: 56,
-                    minHeight: 56,
+                    width: 25,
+                    height: 24,
+                    minWidth: 25,
+                    minHeight: 24,
                     objectFit: "contain",
                   }}
                 />
+
                 <span className="font-semibold text-foreground">WRBNT</span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
                   WRBNT/USDC.e
