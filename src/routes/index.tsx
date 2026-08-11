@@ -784,10 +784,13 @@ function Page() {
                 <img
                   src={lucidLogo}
                   alt=""
-                  width={20}
-                  height={20}
                   className="shrink-0"
-                  style={LOGO_STYLE}
+                  style={{
+                    height: 20,
+                    width: "auto",
+                    maxWidth: 80,
+                    objectFit: "contain",
+                  }}
                 />
                 Lucid Labs Bridge
               </h3>
@@ -809,10 +812,13 @@ function Page() {
                 <img
                   src={reddexLogo}
                   alt=""
-                  width={20}
-                  height={20}
                   className="shrink-0"
-                  style={LOGO_STYLE}
+                  style={{
+                    height: 20,
+                    width: "auto",
+                    maxWidth: 80,
+                    objectFit: "contain",
+                  }}
                 />
                 Reddex Bridge
               </h3>
