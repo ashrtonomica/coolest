@@ -373,9 +373,9 @@ function Frame1080() {
 
       <div style={{ marginTop: 14, flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
         <Label size={12}>Spot</Label>
-        <SpotBlocks scale={0.92} />
+        <SpotBlocks scale={0.85} />
         <Divider />
-        <Derivatives scale={0.9} />
+        <Derivatives scale={0.85} />
       </div>
 
       <div style={{ marginTop: 14 }}>
@@ -416,7 +416,7 @@ function Frame1200() {
             Where to buy and trade RBNT
           </div>
           <Label size={11}>Spot</Label>
-          <SpotBlocks scale={0.62} compact />
+          <SpotBlocks scale={0.58} compact />
         </div>
         <div style={{ width: 1, background: C.hairline }} />
         <div style={{ flex: "0 0 290px", display: "flex", flexDirection: "column" }}>
