@@ -123,7 +123,7 @@ type ChainGroup = {
   chain: string;
   pair: string;
   contract: string;
-  impact: string;
+  impacts: string[];
   severity: "low" | "medium" | "high";
   note?: string;
   unusableNote?: string;
@@ -136,7 +136,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Ethereum",
     pair: "WRBNT/ETH",
     contract: "0xb45ffb51984d626ee758b336c61cf20990c6bf13",
-    impact: "100k: 1.51-2.87% | 1M: 13-14%",
+    impacts: ["100k: 1.51-2.87%", "1M: 13-14%"],
     severity: "medium",
     logo: ethereumLogo,
     venues: [
@@ -161,7 +161,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Base",
     pair: "RBNT/USDC",
     contract: "0x020940df9F5E77338a094D55b5B5914122a804A5",
-    impact: "1M: 7.88-8.04% | 100k: 13.36%",
+    impacts: ["1M: 7.88-8.04%", "100k: 13.36%"],
     severity: "medium",
     logo: baseLogo,
     venues: [
@@ -191,7 +191,7 @@ const CHAIN_GROUPS: ChainGroup[] = [
     chain: "Solana",
     pair: "WRBNT/-",
     contract: "2GBVt2ENvbHepuJMWYTPkkfpWUabAhsaXToYw8UphxS3",
-    impact: "10k: 86.77%",
+    impacts: ["10k: 86.77%"],
     severity: "high",
     note: "No live pool confirmed - status unconfirmed.",
     unusableNote: "effectively unusable at this size",
