@@ -302,7 +302,7 @@ function ImpactBadge({
   children,
 }: {
   severity: ChainGroup["severity"];
-  children: string;
+  children: ReactNode;
 }) {
   const color = IMPACT_COLORS[severity];
   return (
