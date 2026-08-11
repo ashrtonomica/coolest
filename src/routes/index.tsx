@@ -675,9 +675,14 @@ function Page() {
           className="block w-auto"
           style={{ height: 56, objectFit: "contain" }}
         />
-        <span className="label-sm text-[11px] text-muted-foreground">
-          TASK-20
-        </span>
+        <div className="flex items-center gap-4">
+          <Link to="/graphic" className="label-sm footer-doc-link">
+            Download
+          </Link>
+          <span className="label-sm text-[11px] text-muted-foreground">
+            TASK-20
+          </span>
+        </div>
       </div>
 
 
