@@ -666,14 +666,18 @@ function Page() {
 
   return (
     <main className="mx-auto w-full max-w-4xl px-5 py-10 sm:px-8 sm:py-14">
-      <div className="mb-4 flex items-center justify-between">
-        <span className="text-[13px] font-bold tracking-[0.12em] text-foreground uppercase">
-          Redbelly DAO
-        </span>
+      <div className="mb-8 flex items-center justify-between gap-6 pt-2">
+        <img
+          src={daoLogo}
+          alt="Redbelly DAO"
+          className="block w-auto"
+          style={{ height: 28, objectFit: "contain" }}
+        />
         <span className="label-sm text-[11px] text-muted-foreground">
           TASK-20
         </span>
       </div>
+
 
       <header className="border-b border-hairline pb-8">
         <h1 className="text-[32px] leading-tight font-bold tracking-[-0.02em] text-foreground sm:text-[44px]">
