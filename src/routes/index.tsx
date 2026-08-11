@@ -956,7 +956,7 @@ function Page() {
       </div>
 
       <footer className="mt-10 border-t border-hairline pt-6">
-        <p className="font-mono text-[13px] text-accent">
+        <p className="font-mono text-[13px]" style={{ color: "#ffb3ae" }}>
           Last verified: 2026-08-08 UTC
         </p>
         <p className="mt-2 text-[15px] text-secondary-foreground">
@@ -970,7 +970,8 @@ function Page() {
           href="https://redbelly-dao-taskboard.vercel.app/"
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-3 inline-block text-[14px] text-accent underline underline-offset-4 hover:no-underline"
+          className="mt-3 inline-block text-[14px] underline underline-offset-4 hover:no-underline"
+          style={{ color: "#ffb3ae" }}
         >
           Back to the Redbelly DAO Task Board
         </a>
