@@ -22,6 +22,22 @@ const LOGO_STYLE = {
   objectFit: "contain",
 } as const;
 
+// Wide wordmark logos (Lucid, Reddex) are cropped to content and rendered
+// at fixed height with auto width so the real logo stays legible.
+const WORDMARK_STYLE = {
+  height: 28,
+  width: "auto",
+  maxWidth: 140,
+  objectFit: "contain",
+} as const;
+
+const WORDMARK_SM_STYLE = {
+  height: 20,
+  width: "auto",
+  maxWidth: 100,
+  objectFit: "contain",
+} as const;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -386,7 +402,7 @@ function ChainGroupRow({ group }: { group: ChainGroup }) {
         <p className="mt-1.5 text-[14px] text-warning">{group.note}</p>
       ) : null}
       {open ? (
-        <div className="mt-2 rounded-chip border border-hairline bg-nested p-3">
+        <div className="mt-3 border-t border-hairline pt-3">
           <p className="font-mono text-[12px] break-all text-muted-foreground">
             <span className="text-secondary-foreground">Contract:</span>{" "}
             {group.contract}
@@ -667,7 +683,10 @@ function Page() {
           Canonical venue list: native, wrapped, and derivatives
         </p>
         <div className="mt-5 flex flex-wrap items-center gap-4">
-          <span className="font-mono text-[13px] text-accent">
+          <span
+            className="font-mono text-[13px]"
+            style={{ color: "#ffb3ae" }}
+          >
             Last verified: 2026-08-08 UTC
           </span>
           <a
@@ -732,14 +751,16 @@ function Page() {
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-col items-start gap-1">
                 <span className="flex items-center gap-2">
-                  <img
-                    src={rbntLogo}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="shrink-0"
-                    style={LOGO_STYLE}
-                  />
+                  <span className="flex w-14 shrink-0 items-center">
+                    <img
+                      src={rbntLogo}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="shrink-0"
+                      style={LOGO_STYLE}
+                    />
+                  </span>
                   <span className="font-semibold text-foreground">RBNT</span>
                 </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
@@ -754,20 +775,22 @@ function Page() {
             <li className="flex flex-col flex-wrap gap-2 border-b border-hairline py-3 last:border-b-0 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-4">
               <div className="flex flex-col items-start gap-1">
                 <span className="flex items-center gap-2">
-                  <img
-                    src={wrbntLogo}
-                    alt=""
-                    width={56}
-                    height={56}
-                    className="shrink-0"
-                    style={{
-                      width: 56,
-                      height: 56,
-                      minWidth: 56,
-                      minHeight: 56,
-                      objectFit: "contain",
-                    }}
-                  />
+                  <span className="flex w-14 shrink-0 items-center">
+                    <img
+                      src={wrbntLogo}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="shrink-0"
+                      style={{
+                        width: 56,
+                        height: 56,
+                        minWidth: 56,
+                        minHeight: 56,
+                        objectFit: "contain",
+                      }}
+                    />
+                  </span>
                   <span className="font-semibold text-foreground">WRBNT</span>
                 </span>
                 <span className="font-mono text-[13px] text-secondary-foreground">
@@ -787,10 +810,8 @@ function Page() {
             <img
               src={reddexLogo}
               alt=""
-              width={20}
-              height={20}
               className="mr-2 inline-block align-[-4px]"
-              style={LOGO_STYLE}
+              style={WORDMARK_SM_STYLE}
             />
             Reddex is the official liquidity hub for Redbelly Network.
           </p>
@@ -803,14 +824,8 @@ function Page() {
                 <img
                   src={lucidLogo}
                   alt=""
-                  width={28}
-                  height={28}
                   className="shrink-0"
-                  style={{
-                    width: 28,
-                    height: 28,
-                    objectFit: "contain",
-                  }}
+                  style={WORDMARK_STYLE}
                 />
                 Lucid Labs Bridge
               </h3>
@@ -832,14 +847,8 @@ function Page() {
                 <img
                   src={reddexLogo}
                   alt=""
-                  width={28}
-                  height={28}
                   className="shrink-0"
-                  style={{
-                    width: 28,
-                    height: 28,
-                    objectFit: "contain",
-                  }}
+                  style={WORDMARK_STYLE}
                 />
                 Reddex Bridge
               </h3>
@@ -937,7 +946,7 @@ function Page() {
       </div>
 
       <footer className="mt-10 border-t border-hairline pt-6">
-        <p className="font-mono text-[13px] text-accent">
+        <p className="font-mono text-[13px]" style={{ color: "#ffb3ae" }}>
           Last verified: 2026-08-08 UTC
         </p>
         <p className="mt-2 text-[15px] text-secondary-foreground">
@@ -951,7 +960,8 @@ function Page() {
           href="https://redbelly-dao-taskboard.vercel.app/"
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-3 inline-block text-[14px] text-accent underline underline-offset-4 hover:no-underline"
+          className="mt-3 inline-block text-[14px] underline underline-offset-4 hover:no-underline"
+          style={{ color: "#ffb3ae" }}
         >
           Back to the Redbelly DAO Task Board
         </a>
