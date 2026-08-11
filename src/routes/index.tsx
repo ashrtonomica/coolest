@@ -723,7 +723,7 @@ function Page() {
         </Card>
 
         <Card
-          title="Spot - Wrapped RBNT (wRBNT)"
+          title="Spot - RBNT / WRBNT"
           caption="Separate from native RBNT"
           captionTone="warning"
         >
